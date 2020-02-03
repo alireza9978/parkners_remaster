@@ -2,9 +2,9 @@
 
 buildscript {
     repositories {
+        maven { url "https://dl.bintray.com/neshan/neshan-android-sdk" }
         google()
         jcenter()
-        
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
@@ -16,6 +16,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url "https://dl.bintray.com/neshan/neshan-android-sdk" }
         google()
         jcenter()
         
