@@ -1,8 +1,9 @@
-package me.coleo.snapion;
+package me.coleo.snapion.Activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import me.coleo.snapion.R;
 
 public class MainActivity extends AppCompatActivity {
 
