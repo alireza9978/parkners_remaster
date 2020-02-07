@@ -8,8 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.TextView" parent="AppTheme">
-
+    <style name="AppTheme.EditText" parent="Theme.AppCompat">
+        <item name="android:editTextColor">@color/colorText</item>
+        <item name="editTextColor">@color/colorText</item>
+        <item name="editTextBackground">@color/colorLightOff</item>
+        <item name="android:textColorHint">@color/colorText</item>
     </style>
 
 </resources>

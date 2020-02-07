@@ -6,4 +6,7 @@
     <color name="colorLightOff">#909090</color>
     <color name="colorLightOn">#FFFFFF</color>
 
+    <color name="colorMapItemBack">#DFE2E9</color>
+    <color name="colorMapConteinersBack">#F2F2F2</color>
+    <color name="colorText">#000000</color>
 </resources>
