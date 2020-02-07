@@ -6,5 +6,7 @@
 
     <string name="search_bar_transition_name">mmd is</string>
     <string name="search_button_transition_name">ali is</string>
+    <string name="nice_str">پارکینگ های کجا؟</string>
+    <string name="logo_button">logo_button</string>
 
 </resources>

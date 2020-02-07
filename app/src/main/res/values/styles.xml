@@ -28,4 +28,11 @@
         <item name="android:background">@color/colorMapItemBack</item>
     </style>
 
+    <style name="AppTheme.TextView" parent="@android:style/Theme.Holo">
+        <item name="editTextColor">@color/colorText</item>
+        <item name="android:gravity">center|start</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
 </resources>
