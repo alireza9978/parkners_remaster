@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/AppTheme.MapActivity"
     tools:context=".Activities.MainActivity">
 
     <org.neshan.ui.MapView
@@ -50,21 +51,26 @@
                 android:background="@drawable/ic_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:transitionName="@string/search_button_transition_name"
+                />
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/search_box_edit_text"
                 style="@style/AppTheme.EditText"
                 android:layout_width="0dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginLeft="5dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:hint="@string/search_parking"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/search_button"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:transitionName="@string/search_bar_transition_name"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,11 +8,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.EditText" parent="Theme.AppCompat">
+
+    <style name="AppTheme.MapActivity" parent="AppTheme">
+        <item name="android:windowContentTransitions">true</item>
+
+    </style>
+
+    <style name="AppTheme.SearchActivity" parent="AppTheme">
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="AppTheme.EditText" parent="@android:style/Theme.Holo">
         <item name="android:editTextColor">@color/colorText</item>
         <item name="editTextColor">@color/colorText</item>
         <item name="editTextBackground">@color/colorLightOff</item>
         <item name="android:textColorHint">@color/colorText</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fillEnabled">false</item>
+        <item name="android:background">@color/colorMapItemBack</item>
     </style>
 
 </resources>
