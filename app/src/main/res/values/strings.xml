@@ -1,11 +1,14 @@
 <resources>
-    <string name="app_name">Snapion</string>
+    <string name="app_name">Parkners</string>
+    <string name="search_parking_list">تایپ کنید..</string>
     <string name="search_parking">جستجو پارکینگ</string>
     <string name="splash_text">جای پارکت رو پیدا کن!</string>
     <string name="logo">logo</string>
 
     <string name="search_bar_transition_name">mmd is</string>
     <string name="search_button_transition_name">ali is</string>
+    <string name="location_back_transition_name">reza is</string>
+    <string name="main_container_transition_name">kazem is</string>
     <string name="nice_str">پارکینگ های کجا؟</string>
     <string name="logo_button">logo_button</string>
 
