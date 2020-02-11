@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import me.coleo.snapion.R;
 import me.coleo.snapion.models.Parking;
+import me.coleo.snapion.ui_element.SquaredProgressBar;
 
 public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.ParkingViewHolder> {
 
@@ -32,6 +33,7 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ParkingViewHolder holder, int position) {
         holder.parkingName.setText(parkingArrayList.get(position).getName());
+        holder.progressBar.init(50f);
     }
 
     @Override
@@ -42,10 +44,12 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
     class ParkingViewHolder extends RecyclerView.ViewHolder {
 
         TextView parkingName;
+        SquaredProgressBar progressBar;
 
         ParkingViewHolder(@NonNull View itemView) {
             super(itemView);
             parkingName = itemView.findViewById(R.id.parking_name);
+            progressBar = itemView.findViewById(R.id.progress_bar);
         }
     }
 

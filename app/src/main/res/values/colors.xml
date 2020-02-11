@@ -9,4 +9,12 @@
     <color name="colorMapItemBack">#DFE2E9</color>
     <color name="colorMapConteinersBack">#F2F2F2</color>
     <color name="colorText">#000000</color>
+
+    <color name="progress_bar_one">#C0FF33</color>
+    <color name="progress_bar_two">#FEFF5C</color>
+    <color name="progress_bar_three">#FAD964</color>
+    <color name="progress_bar_four">#FB944B</color>
+    <color name="progress_bar_five">#FB4B4B</color>
+    <color name="progress_bar_zero">#C4C4C4</color>
+
 </resources>
