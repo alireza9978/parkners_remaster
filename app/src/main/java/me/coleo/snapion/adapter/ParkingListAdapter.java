@@ -1,8 +1,12 @@
 package me.coleo.snapion.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,16 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import me.coleo.snapion.Activities.ItemActivity;
 import me.coleo.snapion.R;
+import me.coleo.snapion.constants.Constants;
 import me.coleo.snapion.models.Parking;
 import me.coleo.snapion.ui_element.SquaredProgressBar;
 
 public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.ParkingViewHolder> {
 
     private ArrayList<Parking> parkingArrayList;
+    private Context context;
 
-    public ParkingListAdapter(ArrayList<Parking> parkingArrayList) {
+    public ParkingListAdapter(ArrayList<Parking> parkingArrayList, Context context) {
         this.parkingArrayList = parkingArrayList;
+        this.context = context;
     }
 
     @NonNull
@@ -32,8 +40,22 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ParkingViewHolder holder, int position) {
-        holder.parkingName.setText(parkingArrayList.get(position).getName());
-        holder.progressBar.init(50f);
+        Parking parking = parkingArrayList.get(position);
+        holder.parkingName.setText(parking.getName());
+        holder.progressBar.init(parking.getProgress());
+        holder.parkingAddress.setText(parking.getAddress());
+        holder.distance.setText(parking.getDistanceString());
+        holder.route.setOnClickListener(v -> {
+            Uri gmmIntentUri = Uri.parse("google.navigation:q=" + parking.getLat() + "," + parking.getLng() + "&mode=d");
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            context.startActivity(mapIntent);
+        });
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ItemActivity.class);
+            intent.putExtra(Constants.PARKING_ID, parking.getId());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -44,12 +66,18 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
     class ParkingViewHolder extends RecyclerView.ViewHolder {
 
         TextView parkingName;
+        TextView parkingAddress;
+        TextView distance;
         SquaredProgressBar progressBar;
+        ImageButton route;
 
         ParkingViewHolder(@NonNull View itemView) {
             super(itemView);
             parkingName = itemView.findViewById(R.id.parking_name);
             progressBar = itemView.findViewById(R.id.progress_bar);
+            parkingAddress = itemView.findViewById(R.id.parking_address);
+            distance = itemView.findViewById(R.id.parking_distance);
+            route = itemView.findViewById(R.id.route_button);
         }
     }
 

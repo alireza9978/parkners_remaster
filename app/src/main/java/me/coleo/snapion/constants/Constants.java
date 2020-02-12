@@ -9,6 +9,17 @@ public class Constants {
     private static String TOKEN_STORAGE = "someWhereInDarkness";
     private static String TOKEN_DATA = "someWhereInDarkness12";
 
+    public static String PARKING_ID = "parkingson";
+    public static String SEARCH_MODE = "SEASsdas";
+
+    /**
+     * گرفتن کلید ارتباط با سرور
+     */
+    public static String getToken(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(TOKEN_STORAGE, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(TOKEN_DATA, Constants.NO_TOKEN);
+    }
+
     private static String BASE_URL = "http://";
 
     /**
@@ -22,12 +33,9 @@ public class Constants {
         editor.commit();
     }
 
-    /**
-     *گرفتن کلید ارتباط با سرور
-     */
-    public static String getToken(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(TOKEN_STORAGE, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(TOKEN_DATA, Constants.NO_TOKEN);
+    public enum SearchMode {
+        location,
+        search,
     }
 
     /**
@@ -42,7 +50,6 @@ public class Constants {
         String second = time.substring(12, 14);
         return hour + ":" + minute + ":" + second + " - " + year + "/" + month + "/" + day;
     }
-
 
 
 }

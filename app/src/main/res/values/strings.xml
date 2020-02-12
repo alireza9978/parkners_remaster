@@ -11,5 +11,7 @@
     <string name="main_container_transition_name">kazem is</string>
     <string name="nice_str">پارکینگ های کجا؟</string>
     <string name="logo_button">logo_button</string>
+    <string name="find_route">find route</string>
+    <string name="pin_button">pin_button</string>
 
 </resources>

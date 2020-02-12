@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -93,11 +93,8 @@ public class SquaredProgressBar extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        float squareSize = (getWidth() * 0.7f) / squareCount;
-        float spaceSize = (getWidth() * 0.3f) / (squareCount - 1);
-
-        Log.i(TAG, "onDraw: squareSize" + squareSize);
-        Log.i(TAG, "onDraw: spaceSize" + spaceSize);
+        float squareSize = ((getWidth() - (2 * getHeight())) * 0.8f) / squareCount;
+        float spaceSize = ((getWidth() - (2 * getHeight())) * 0.2f) / (squareCount - 1);
 
         float startX = 0f;
         float endX = startX + squareSize;
@@ -105,16 +102,24 @@ public class SquaredProgressBar extends View {
         float endY = getHeight();
         Paint paint;
         for (int i = squareCount - 1; i > -1; i--) {
-            if (i > fillCount - 1)
+            if (i < fillCount)
                 paint = paintFull;
             else
                 paint = paintEmpty;
-            canvas.drawRect(startX, startY, endX, endY, paint);
+            drawShape(startX, startY, endX, endY, canvas, paint);
             startX = startX + squareSize + spaceSize;
             endX = startX + squareSize;
         }
 
         super.onDraw(canvas);
+    }
+
+    private void drawShape(float startX, float startY, float width, float height, Canvas canvas, Paint paint) {
+        RectF rectF = new RectF(startX, startY, startX + height, startY + height);
+        canvas.drawArc(rectF, 90f, 180f, true, paint);
+        canvas.drawRect(startX + (height / 2), startY, width + (height / 2), height, paint);
+        rectF = new RectF(width - height, startY, width + height, startY + height);
+        canvas.drawArc(rectF, 270f, 180f, true, paint);
     }
 
 }

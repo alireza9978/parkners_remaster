@@ -25,6 +25,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+
         recyclerView = findViewById(R.id.parking_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -40,15 +41,13 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.addOnScrollListener(listener);
 
         ArrayList<Parking> parkingArrayList = new ArrayList<>();
-        parkingArrayList.add(new Parking("numberOne"));
-        parkingArrayList.add(new Parking("numberTwo"));
-        parkingArrayList.add(new Parking("number3"));
-        parkingArrayList.add(new Parking("number4"));
-        parkingArrayList.add(new Parking("number5"));
-        parkingArrayList.add(new Parking("number6"));
-        parkingArrayList.add(new Parking("number7"));
-        parkingArrayList.add(new Parking("number8"));
-        parkingListAdapter = new ParkingListAdapter(parkingArrayList);
+        parkingArrayList.add(new Parking("آلتون", "خیابان دانشگاه بعد چهارراه دوم پلاک ۱۲۳ طبقه ی منفی ۱۲", 15f, 3.5f));
+        parkingArrayList.add(new Parking("آلتون", "خیابان دانشگاه بعد چهارراه دوم پلاک ۱۲۳ طبقه ی منفی ۱۲", 35f, 3.5f));
+        parkingArrayList.add(new Parking("آلتون", "خیابان دانشگاه بعد چهارراه دوم پلاک ۱۲۳ طبقه ی منفی ۱۲", 55f, 3.5f));
+        parkingArrayList.add(new Parking("آلتون", "خیابان دانشگاه بعد چهارراه دوم پلاک ۱۲۳ طبقه ی منفی ۱۲", 75f, 3.5f));
+        parkingArrayList.add(new Parking("آلتون", "خیابان دانشگاه بعد چهارراه دوم پلاک ۱۲۳ طبقه ی منفی ۱۲", 95f, 3.5f));
+
+        parkingListAdapter = new ParkingListAdapter(parkingArrayList, getApplicationContext());
         recyclerView.setAdapter(parkingListAdapter);
 
     }

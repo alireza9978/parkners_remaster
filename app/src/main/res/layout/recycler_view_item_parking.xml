@@ -4,13 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="125dp"
     android:layout_margin="10dp"
+    android:background="@drawable/parking_list_item_back"
+    android:elevation="4dp"
     android:padding="15dp">
 
     <TextView
         android:id="@+id/parking_distance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="2.34Km"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/route_button"
         app:layout_constraintRight_toRightOf="@id/route_button"
@@ -20,6 +21,9 @@
         android:id="@+id/route_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:background="@color/colorParkingItemBack"
+        android:contentDescription="@string/find_route"
+        android:src="@drawable/ic_routing_icon"
         app:layout_constraintBottom_toTopOf="@id/parking_distance"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/textContainer"
@@ -29,18 +33,17 @@
         android:id="@+id/textContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/route_button"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/progress_bar"
         android:padding="5dp"
-        >
+        app:layout_constraintBottom_toTopOf="@id/progress_bar"
+        app:layout_constraintLeft_toRightOf="@id/route_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/parking_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="آلتون"
+            android:gravity="start"
             android:textColor="@color/colorText"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -57,7 +60,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="مشهد. خیابان دانشگاه بین دانشگاه ۲۲ و 24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
