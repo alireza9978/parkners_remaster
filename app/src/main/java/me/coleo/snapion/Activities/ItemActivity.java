@@ -13,11 +13,14 @@ public class ItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
-
         Bundle extra = getIntent().getExtras();
         assert extra != null;
         final int id = extra.getInt(Constants.PARKING_ID);
         //todo get parking info
 
     }
+
+
+    private void putPinOnMap(int lat,int lang){}
+
 }

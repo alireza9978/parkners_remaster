@@ -9,6 +9,7 @@
     <color name="colorMapItemBack">#DFE2E9</color>
     <color name="colorMapConteinersBack">#F2F2F2</color>
     <color name="colorParkingItemBack">#ffffff</color>
+    <color name="colorItemBack">#E5E5E5</color>
     <color name="colorText">#000000</color>
 
     <color name="progress_bar_one">#C0FF33</color>
