@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+    <item
+        android:drawable="@drawable/ic_parkners_logo"
+        android:height="45dp"
+        android:width="38dp"
+        />
+
+    <item
+        android:drawable="@drawable/ic_arkners"
+        android:top="37dp"
+        android:left="9dp"
+        android:height="8dp"
+        android:width="29dp"
+        />
+</layer-list>

@@ -11,6 +11,7 @@
     <color name="colorParkingItemBack">#ffffff</color>
     <color name="colorItemBack">#E5E5E5</color>
     <color name="colorText">#000000</color>
+    <color name="colorHint">#636363</color>
 
     <color name="progress_bar_one">#C0FF33</color>
     <color name="progress_bar_two">#FEFF5C</color>

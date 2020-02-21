@@ -1,5 +1,6 @@
 package me.coleo.snapion.adapter;
 
+import me.coleo.snapion.R;
 import ss.com.bannerslider.adapters.SliderAdapter;
 import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
 
@@ -9,7 +10,9 @@ public class ItemSliderAdapter extends SliderAdapter {
         this.itemCt = itemCt;
     }
 
-    private int itemCt;
+    private int itemCt=5;
+
+
 
     @Override
     public int getItemCount() {
@@ -18,6 +21,6 @@ public class ItemSliderAdapter extends SliderAdapter {
 
     @Override
     public void onBindImageSlide(int position, ImageSlideViewHolder imageSlideViewHolder) {
-
+        imageSlideViewHolder.bindImageSlide(R.drawable.logo);
     }
 }
