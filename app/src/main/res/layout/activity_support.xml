@@ -34,103 +34,103 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white">
 
-            <EditText
-                android:id="@+id/complainET"
-                style="@style/AppTheme.EditText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/support_et_back"
-                android:elevation="10dp"
-                android:ems="10"
-                android:gravity="top"
-                android:hint="پیشنهاد یا شکایت خود را بنویسید:"
-                android:lines="5"
-                android:padding="16dp"
-                android:singleLine="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/supportTitleTV" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
 
-            <Button
-                android:id="@+id/supportSendBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/support_button_back"
-                android:elevation="10dp"
-                android:paddingStart="38dp"
-                android:paddingEnd="38dp"
-                android:text="ارسال"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/complainET" />
+                <EditText
+                    android:id="@+id/complainET"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="32dp"
+                    android:background="@drawable/support_et_back"
+                    android:elevation="10dp"
+                    android:ems="10"
+                    android:gravity="top"
+                    android:hint="پیشنهاد یا شکایت خود را بنویسید:"
+                    android:lines="5"
+                    android:padding="16dp"
+                    android:singleLine="false"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/supportTitleTV" />
 
-            <TextView
-                android:id="@+id/phoneTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:text="۰۹۱۲ ۶۶۵ ۳۰۰۶ "
-                android:textColor="#0000FF"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/supportTitleTV" />
+                <Button
+                    android:id="@+id/supportSendBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/support_button_back"
+                    android:elevation="10dp"
+                    android:paddingStart="38dp"
+                    android:paddingEnd="38dp"
+                    android:text="ارسال"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/complainET" />
 
-            <TextView
-                android:id="@+id/supportTitleTV"
-                style="@style/AppTheme.TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:text="پشتیبانی:"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/phoneIV"
-                app:layout_constraintTop_toBottomOf="@+id/descTV" />
+                <TextView
+                    android:id="@+id/phoneTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:text="۰۹۱۲ ۶۶۵ ۳۰۰۶ "
+                    android:textColor="#0000FF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/supportTitleTV" />
 
-            <TextView
-                android:id="@+id/descTV"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:gravity="center_horizontal"
-                android:text="پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. "
-                android:textColor="@android:color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/supportTitleTV"
+                    style="@style/AppTheme.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="پشتیبانی:"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/phoneIV"
+                    app:layout_constraintTop_toBottomOf="@+id/descTV" />
 
-            <ImageView
-                android:id="@+id/phoneIV"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginEnd="16dp"
-                android:adjustViewBounds="true"
-                app:layout_constraintBottom_toBottomOf="@id/supportTitleTV"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/supportTitleTV"
-                app:srcCompat="@drawable/ic_phone" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/descTV"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_horizontal"
+                    android:text="پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. "
+                    android:textColor="@android:color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/phoneIV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="16dp"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintBottom_toBottomOf="@id/supportTitleTV"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/supportTitleTV"
+                    app:srcCompat="@drawable/ic_phone" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
