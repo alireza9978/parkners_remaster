@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.coleo.snapion">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,18 +13,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.SearchActivity" />
-        <activity android:name=".Activities.ItemActivity" />
+        <activity android:name=".Activities.ItemActivity"></activity>
         <activity android:name=".Activities.SplashActivity">
-
-        </activity>
-        <activity android:name=".Activities.SupportActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.SupportActivity"></activity>
         <activity android:name=".Activities.MainActivity">
+
 
         </activity>
     </application>

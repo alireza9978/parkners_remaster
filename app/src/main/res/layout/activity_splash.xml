@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    tools:context="me.coleo.snapion.Activities.SplashActivity">
+    tools:context=".Activities.SplashActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/lightCV1"
@@ -29,9 +29,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/lightCV2">
+        app:layout_constraintTop_toTopOf="@+id/lightCV2" />
 
-    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/lightCV2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        app:cardBackgroundColor="#909090"
+        app:cardCornerRadius="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/splashTV" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -45,17 +55,6 @@
         app:layout_constraintVertical_bias="0.35000002"
         app:srcCompat="@drawable/logo" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/lightCV2"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="16dp"
-        app:cardBackgroundColor="#909090"
-        app:cardCornerRadius="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/splashTV" />
 
     <TextView
         android:id="@+id/splashTV"
