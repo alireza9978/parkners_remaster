@@ -23,7 +23,7 @@
         <item name="android:editTextColor">@color/colorText</item>
         <item name="editTextColor">@color/colorText</item>
         <item name="editTextBackground">@color/colorLightOff</item>
-        <item name="android:textColorHint">@color/colorText</item>
+        <item name="android:textColorHint">@color/colorHint</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:fillEnabled">false</item>
         <item name="android:background">@color/colorMapItemBack</item>
