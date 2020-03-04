@@ -64,7 +64,7 @@ public class ServerClass {
      */
     public static void createUser(final Context context) {
 
-        String url = Constants.CREATE_USER;
+        String url = Constants.CREATE_USER_URL;
         Log.i(TAG, "createUser: start");
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, response -> {
@@ -89,7 +89,7 @@ public class ServerClass {
      */
     public static void enterUser(final Context context) {
 
-        String url = Constants.ENTER_USER;
+        String url = Constants.ENTER_USER_URL;
 
         String key = Constants.getKey(context);
         Log.i(TAG, "enterUser: key: " + key);
@@ -116,7 +116,7 @@ public class ServerClass {
      */
     public static void aroundParking(Context context, double lat, double lng, ArrayList<Parking> parkings, int page) {
 
-        String url = Constants.ENTER_USER;
+        String url = Constants.AROUND_PARKING_URL;
         url += "?page=" + page;
 
         Log.i(TAG, "around parking");

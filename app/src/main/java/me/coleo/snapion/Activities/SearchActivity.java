@@ -37,7 +37,6 @@ public class SearchActivity extends AppCompatActivity {
     private int page = 1;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +58,8 @@ public class SearchActivity extends AppCompatActivity {
             searchBar.setText("اطراف شما");
             searchBar.setActivated(false);
         } else {
+            hideNotFound();
+            searchBar.setHint("تایپ کنید...");
             searchBar.addTextChangedListener(new TextWatcher() {
 
                 @Override

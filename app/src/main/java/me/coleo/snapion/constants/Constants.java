@@ -31,9 +31,9 @@ public class Constants {
     public static String SEARCH_LAT = "SEASsdxzcs";
 
     private static String BASE_URL = "http://dev2.parkners.com/api/av1/";
-    public static String CREATE_USER = BASE_URL + "users/create";
-    public static String ENTER_USER = BASE_URL + "users/enter";
-    public static String AROUND_PARKING = BASE_URL + "parkings/around_point";
+    public static String CREATE_USER_URL = BASE_URL + "users/create";
+    public static String ENTER_USER_URL = BASE_URL + "users/enter";
+    public static String AROUND_PARKING_URL = BASE_URL + "parkings/around_point";
     public static String SEARCH_LNG = "SEASsda111wxzs";
 
     /**

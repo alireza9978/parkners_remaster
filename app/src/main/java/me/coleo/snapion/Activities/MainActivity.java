@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     // Initializing layout references (views, map and map events)
     private void initLayoutReferences() {
         // Initializing views
@@ -182,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     private void initLocation() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         settingsClient = LocationServices.getSettingsClient(this);
@@ -210,7 +208,6 @@ public class MainActivity extends AppCompatActivity {
         locationSettingsRequest = builder.build();
 
     }
-
 
     public void startReceivingLocationUpdates() {
         startLocationUpdates();
@@ -256,7 +253,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initListener() {
-        pinButton.setOnClickListener(v -> openSearchPage());
+        pinButton.setOnClickListener(v -> {
+            LngLat latLng = map.getFocalPointPosition();
+            openSearchPage(latLng.getX(), latLng.getY());
+        });
         searchBar.setOnClickListener(v -> openSearchPage());
         search.setOnClickListener(v -> openSearchPage());
         findLocation.setOnClickListener(v -> getLastLocation());
@@ -270,7 +270,6 @@ public class MainActivity extends AppCompatActivity {
         bottomLayout = findViewById(R.id.search_bar_container);
         pinButton = findViewById(R.id.pin_button);
     }
-
 
     public void focusOnUserLocation() {
         if (userLocation != null) {
@@ -287,7 +286,6 @@ public class MainActivity extends AppCompatActivity {
         else
             Constants.getLocationPermission(context, (MainActivity) context);
     }
-
 
     @Override
     protected void onPause() {
