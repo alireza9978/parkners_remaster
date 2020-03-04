@@ -6,16 +6,20 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import me.coleo.snapion.Activities.SearchActivity;
 import me.coleo.snapion.Activities.SplashActivity;
 import me.coleo.snapion.constants.Constants;
+import me.coleo.snapion.models.Parking;
 import me.coleo.snapion.models.User;
 
 public class ServerClass {
@@ -63,25 +67,17 @@ public class ServerClass {
         String url = Constants.CREATE_USER;
         Log.i(TAG, "createUser: start");
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            Gson gson = new Gson();
-                            User user = gson.fromJson(response.getJSONObject("user").toString(), User.class);
-                            Constants.setKey(context, user.getKey());
-                            saveToken(context, response);
-                            ServerClass.enterUser(context);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                (Request.Method.GET, url, null, response -> {
+                    try {
+                        Gson gson = new Gson();
+                        User user = gson.fromJson(response.getJSONObject("user").toString(), User.class);
+                        Constants.setKey(context, user.getKey());
+                        saveToken(context, response);
+                        ServerClass.enterUser(context);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        ServerClass.printError("createUser", error);
-                    }
-                });
+                }, error -> ServerClass.printError("createUser", error));
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
@@ -105,22 +101,52 @@ public class ServerClass {
         }
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url, temp, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        saveToken(context, response);
-                        ((SplashActivity) context).goToMain();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        ServerClass.printError("enterUser", error);
-                    }
-                });
+                (Request.Method.POST, url, temp, response -> {
+                    saveToken(context, response);
+                    ((SplashActivity) context).goToMain();
+                }, error -> ServerClass.printError("enterUser", error));
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
     }
 
+    /**
+     * گرفتن پارکینگ ها بر اساس لوکیشن
+     */
+    public static void aroundParking(Context context, double lat, double lng, ArrayList<Parking> parkings, int page) {
+
+        String url = Constants.ENTER_USER;
+        url += "?page=" + page;
+
+        Log.i(TAG, "around parking");
+        JSONObject temp = new JSONObject();
+        try {
+            temp.put("latitude", lat);
+            temp.put("longitude", lng);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.POST, url, temp, response -> {
+                    saveToken(context, response);
+                    try {
+                        JSONArray parkingArray = response.getJSONArray("parkings");
+                        Gson gson = new Gson();
+                        for (int i = 0; i < parkingArray.length(); i++) {
+                            JSONObject parking = parkingArray.getJSONObject(i);
+                            parkings.add(gson.fromJson(parking.toString(), Parking.class));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    ((SearchActivity) context).loadParkingFromServer();
+                }, error -> ServerClass.printError("enterUser", error));
+
+
+        // Access the RequestQueue through your singleton class.
+        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+
+    }
 }

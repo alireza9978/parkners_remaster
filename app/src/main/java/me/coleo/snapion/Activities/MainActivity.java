@@ -1,41 +1,51 @@
 package me.coleo.snapion.Activities;
 
+import android.Manifest;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Looper;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.location.SettingsClient;
 
 import org.neshan.core.Bounds;
 import org.neshan.core.LngLat;
 import org.neshan.layers.VectorElementLayer;
 import org.neshan.services.NeshanMapStyle;
 import org.neshan.services.NeshanServices;
-import org.neshan.styles.AnimationStyle;
-import org.neshan.styles.AnimationStyleBuilder;
-import org.neshan.styles.AnimationType;
-import org.neshan.styles.MarkerStyle;
-import org.neshan.styles.MarkerStyleCreator;
+import org.neshan.ui.ClickData;
+import org.neshan.ui.MapEventListener;
 import org.neshan.ui.MapView;
-import org.neshan.utils.BitmapUtils;
-import org.neshan.vectorelements.Marker;
 
 import me.coleo.snapion.R;
 import me.coleo.snapion.constants.Constants;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
 
     private static final String TAG = MainActivity.class.getName();
 
@@ -45,28 +55,179 @@ public class MainActivity extends AppCompatActivity {
     private Button searchBar;
     private ImageButton pinButton;
     private ConstraintLayout bottomLayout;
-
-    private VectorElementLayer userMarkerLayer;
-
-    // User's current location
+    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
+    final Context context = this;
+    final int REQUEST_CODE = 123;
     private Location userLocation;
     private FusedLocationProviderClient fusedLocationClient;
+    private boolean permissionToastShown = false;
+    private boolean permissionGranted;
+    private LocationCallback locationCallback;
+    private SettingsClient settingsClient;
+    private LocationRequest locationRequest;
+    private LocationSettingsRequest locationSettingsRequest;
+
+    public boolean isPermissionToastShown() {
+        return permissionToastShown;
+    }
+
+    public void setPermissionToastShown(boolean permissionToastShown) {
+        this.permissionToastShown = permissionToastShown;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        permissionToastShown = false;
+        if (requestCode == Constants.MY_PERMISSIONS_REQUEST_LOCATION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                permissionGranted = true;
+                Constants.getLocationPermission(context, this);
+                findLocation.performClick();
+            } else {
+                Toast.makeText(context, "جهت موقعیت یابی ، برنامه نیاز به دسترسی به موقعیت مکانی دارد.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        initViews();
-        initListener();
-        initMap();
-        initLocation();
+        permissionGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initLayoutReferences();
+        initLocation();
+        startReceivingLocationUpdates();
+
+    }
+
+
+    // Initializing layout references (views, map and map events)
+    private void initLayoutReferences() {
+        // Initializing views
+        initViews();
+        // Initializing mapView element
+        initMap();
+        initListener();
+        // when long clicked on map, a marker is added in clicked location
+        // MapEventListener gets all events on map, including single tap, double tap, long press, etc
+        // we should check event type by calling getClickType() on mapClickInfo (from ClickData class)
+        map.setMapEventListener(new MapEventListener() {
+
+//            @Override
+//            public void onMapStable() {
+//                super.onMapStable();
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        pinTV.setScaleX(1.5f);
+//                        pinTV.setScaleY(1.5f);
+//                        work = true;
+//                    }
+//                });
+//
+//            }
+//
+//            private boolean work = true;
+//
+//            @Override
+//            public void onMapMoved() {
+//                super.onMapMoved();
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if (work) {
+//                            pinTV.setScaleX(1f);
+//                            pinTV.setScaleY(1f);
+//                            work = false;
+//                        }
+//                    }
+//                });
+//            }
+
+            @Override
+            public void onMapClicked(ClickData mapClickInfo) {
+                super.onMapClicked(mapClickInfo);
+
+            }
+
+            /*            @Override
+            public void onMapClicked(ClickData mapClickInfo) {
+                if (mapClickInfo.getClickType() == ClickType.CLICK_TYPE_LONG) {
+                    // by calling getClickPos(), we can get position of clicking (or tapping)
+                    LngLat clickedLocation = mapClickInfo.getClickPos();
+                    // addMarker adds a marker (pretty self explanatory :D) to the clicked location
+                    writeStringifiedAddress(clickedLocation.getY(),clickedLocation.getX());
+                    addMarker(clickedLocation);
+                }
+            }
+            */
+        });
+    }
+
+
+    private void initLocation() {
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        settingsClient = LocationServices.getSettingsClient(this);
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                // location is received
+                if (userLocation == null) {
+                    userLocation = locationResult.getLastLocation();
+                    map.setFocalPointPosition(new LngLat(userLocation.getLongitude(), userLocation.getLatitude()), 1f);
+                }
+                userLocation = locationResult.getLastLocation();
+            }
+        };
+
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
+        locationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(locationRequest);
+        locationSettingsRequest = builder.build();
+
+    }
+
+
+    public void startReceivingLocationUpdates() {
+        startLocationUpdates();
+    }
+
+    /**
+     * Starting location updates
+     * Check whether location settings are satisfied and then
+     * location updates will be requested
+     */
+    private void startLocationUpdates() {
+        settingsClient
+                .checkLocationSettings(locationSettingsRequest)
+                .addOnSuccessListener(this, locationSettingsResponse -> fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper()))
+                .addOnFailureListener(this, e -> {
+                    int statusCode = ((ApiException) e).getStatusCode();
+                    if (statusCode == LocationSettingsStatusCodes.RESOLUTION_REQUIRED) {
+                        try {
+                            ResolvableApiException rae = (ResolvableApiException) e;
+                            rae.startResolutionForResult(MainActivity.this, REQUEST_CODE);
+                        } catch (IntentSender.SendIntentException ignored) {
+                        }
+                    }
+                });
+    }
+
     private void initMap() {
-        userMarkerLayer = NeshanServices.createVectorElementLayer();
+        VectorElementLayer userMarkerLayer = NeshanServices.createVectorElementLayer();
 
         LngLat focalPoint = new LngLat(59.6168, 36.2605);
         map.setFocalPointPosition(focalPoint, 0f);
@@ -79,6 +240,8 @@ public class MainActivity extends AppCompatActivity {
         );
 
         map.getLayers().add(userMarkerLayer);
+
+
     }
 
     private void initListener() {
@@ -97,64 +260,57 @@ public class MainActivity extends AppCompatActivity {
         pinButton = findViewById(R.id.pin_button);
     }
 
-    private void initLocation() {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+    public void focusOnUserLocation() {
+        if (userLocation != null) {
+            map.setFocalPointPosition(
+                    new LngLat(userLocation.getLongitude(), userLocation.getLatitude()), 0.25f);
+            map.setZoom(15, 0.25f);
+        }
     }
 
     private void getLastLocation() {
+        permissionGranted = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        if (permissionGranted)
+            focusOnUserLocation();
+        else
+            Constants.getLocationPermission(context, (MainActivity) context);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+    public void stopLocationUpdates() {
+        // Removing location updates
         fusedLocationClient
-                .getLastLocation()
+                .removeLocationUpdates(locationCallback)
                 .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        onLocationChange(task.getResult());
-                        Log.i(TAG, "lat " + task.getResult().getLatitude() + " lng " + task.getResult().getLongitude());
-                    } else {
-                        Toast.makeText(MainActivity.this, "موقعیت یافت نشد.", Toast.LENGTH_SHORT).show();
-                    }
+//                        Toast.makeText(getApplicationContext(), "Location updates stopped!", Toast.LENGTH_SHORT).show();
                 });
     }
 
-    private void onLocationChange(Location location) {
-        this.userLocation = location;
-        addUserMarker(new LngLat(userLocation.getLongitude(), userLocation.getLatitude()));
-        map.setFocalPointPosition(
-                new LngLat(userLocation.getLongitude(), userLocation.getLatitude()),
-                0.25f);
-        map.setZoom(15, 0.25f);
-    }
-
-
-    private void addUserMarker(LngLat loc) {
-        userMarkerLayer.clear();
-
-        AnimationStyleBuilder animStBl = new AnimationStyleBuilder();
-        animStBl.setFadeAnimationType(AnimationType.ANIMATION_TYPE_SMOOTHSTEP);
-        animStBl.setSizeAnimationType(AnimationType.ANIMATION_TYPE_SPRING);
-        animStBl.setPhaseInDuration(0.5f);
-        animStBl.setPhaseOutDuration(0.5f);
-        AnimationStyle animSt = animStBl.buildStyle();
-
-        MarkerStyleCreator markStCr = new MarkerStyleCreator();
-        markStCr.setSize(20f);
-        markStCr.setBitmap(BitmapUtils.createBitmapFromAndroidBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_location_pin)));
-        markStCr.setAnimationStyle(animSt);
-        MarkerStyle markSt = markStCr.buildStyle();
-
-        Marker marker = new Marker(loc, markSt);
-
-        userMarkerLayer.add(marker);
-    }
 
     private void openSearchPage(double lat, double lng) {
         Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-        intent.putExtra(Constants.SEARCH_MODE, Constants.SearchMode.search);
-        startActivity(intent);
+        intent.putExtra(Constants.SEARCH_MODE, Constants.SearchMode.location);
+        intent.putExtra(Constants.SEARCH_LAT, lat);
+        intent.putExtra(Constants.SEARCH_LNG, lng);
+
+        startTransition(intent);
     }
 
     private void openSearchPage() {
         Intent i = new Intent(MainActivity.this, SearchActivity.class);
         i.putExtra(Constants.SEARCH_MODE, Constants.SearchMode.search);
 
+        startTransition(i);
+    }
+
+    private void startTransition(Intent intent) {
         String transitionNameEdit = getString(R.string.search_bar_transition_name);
         String transitionNameButton = getString(R.string.search_button_transition_name);
         String transitionNameLocation_back = getString(R.string.location_back_transition_name);
@@ -166,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
         Pair<View, String> p4 = new Pair<>(bottomLayout, transitionNameContainer);
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, p1, p2, p3, p4);
-        startActivity(i, transitionActivityOptions.toBundle());
+        startActivity(intent, transitionActivityOptions.toBundle());
     }
 
 }
