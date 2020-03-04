@@ -22,218 +22,219 @@
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/mapCL"
                 android:layout_width="match_parent"
-                android:layout_height="284dp"
-                android:background="@color/colorMapItemBack"
-                android:elevation="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="wrap_content">
 
-
-                <org.neshan.ui.MapView
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mapCL"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/mdm"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:backgroundTint="@android:color/transparent"
-                    android:divider="@android:color/transparent"
-                    android:dividerHeight="0.0px"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardElevation="30dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
-
-                    <ImageButton
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/share_item_back"
-                        android:contentDescription="@string/find_route"
-                        android:fadingEdgeLength="1dp"
-                        android:src="@drawable/item_share" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:backgroundTint="@android:color/transparent"
-                    android:divider="@android:color/transparent"
-                    android:dividerHeight="0.0px"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardElevation="24dp"
-                    app:cardMaxElevation="24dp"
-                    app:cardPreventCornerOverlap="false"
+                    android:layout_height="284dp"
+                    android:background="@color/colorMapItemBack"
+                    android:elevation="0dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageButton
-                        android:id="@+id/route_button"
+
+                    <org.neshan.ui.MapView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/mdm"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/back_button_bg_item_layout"
-                        android:contentDescription="@string/find_route"
-                        android:fadingEdgeLength="1dp"
-                        android:src="@drawable/ic_back_arrow" />
-                </androidx.cardview.widget.CardView>
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@android:color/transparent"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="0.0px"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="30dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/mm"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:backgroundTint="@android:color/transparent"
-                    android:divider="@android:color/transparent"
-                    android:dividerHeight="0.0px"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardElevation="30dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                        <ImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/share_item_back"
+                            android:contentDescription="@string/find_route"
+                            android:fadingEdgeLength="1dp"
+                            android:src="@drawable/item_share" />
+                    </androidx.cardview.widget.CardView>
 
-                    <ImageButton
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/routing_item_back"
-                        android:contentDescription="@string/find_route"
-                        android:fadingEdgeLength="1dp"
-                        android:src="@drawable/ic_routing_icon" />
-                </androidx.cardview.widget.CardView>
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@android:color/transparent"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="0.0px"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="24dp"
+                        app:cardMaxElevation="24dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageButton
+                            android:id="@+id/route_button"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/back_button_bg_item_layout"
+                            android:contentDescription="@string/find_route"
+                            android:fadingEdgeLength="1dp"
+                            android:src="@drawable/ic_back_arrow" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/mm"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@android:color/transparent"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="0.0px"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="30dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <ImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/routing_item_back"
+                            android:contentDescription="@string/find_route"
+                            android:fadingEdgeLength="1dp"
+                            android:src="@drawable/ic_routing_icon" />
+                    </androidx.cardview.widget.CardView>
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/itemInfoCL"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mapCL"
-                app:layout_constraintVertical_bias="1.0">
-
-
-                <ss.com.bannerslider.Slider
-                    android:id="@+id/itemSlider"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/itemInfoCL"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/itemPicsIV"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/itemPicsIV" />
+                    app:layout_constraintTop_toBottomOf="@+id/mapCL">
 
 
+                    <ss.com.bannerslider.Slider
+                        android:id="@+id/itemSlider"
+                        android:layout_width="0dp"
+                        android:layout_height="150dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/itemPicsIV"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/itemPicsIV" />
 
 
-                <TextView
-                    android:id="@+id/itemTitleTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginRight="16dp"
-                    android:text="TextView"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/itemTitleTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginRight="16dp"
+                        android:text="TextView"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/itemAddrTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text= "TextView"
-                    app:layout_constraintEnd_toStartOf="@+id/itemAddrIV"
-                    app:layout_constraintTop_toTopOf="@+id/itemAddrIV" />
+                    <TextView
+                        android:id="@+id/itemAddrTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        app:layout_constraintEnd_toStartOf="@+id/itemAddrIV"
+                        app:layout_constraintTop_toTopOf="@+id/itemAddrIV" />
 
-                <TextView
-                    android:id="@+id/itemCapacityTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toStartOf="@+id/itemFeeIV"
-                    app:layout_constraintTop_toTopOf="@+id/itemFeeIV" />
+                    <TextView
+                        android:id="@+id/itemCapacityTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        app:layout_constraintEnd_toStartOf="@+id/itemFeeIV"
+                        app:layout_constraintTop_toTopOf="@+id/itemFeeIV" />
 
-                <TextView
-                    android:id="@+id/itemFeeTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toStartOf="@+id/itemCapacityIV"
-                    app:layout_constraintTop_toTopOf="@+id/itemCapacityIV" />
+                    <TextView
+                        android:id="@+id/itemFeeTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        app:layout_constraintEnd_toStartOf="@+id/itemCapacityIV"
+                        app:layout_constraintTop_toTopOf="@+id/itemCapacityIV" />
 
-                <TextView
-                    android:id="@+id/itemTimesTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toStartOf="@+id/itemTimesIV"
-                    app:layout_constraintTop_toTopOf="@+id/itemTimesIV" />
+                    <TextView
+                        android:id="@+id/itemTimesTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView"
+                        app:layout_constraintEnd_toStartOf="@+id/itemTimesIV"
+                        app:layout_constraintTop_toTopOf="@+id/itemTimesIV" />
 
-                <ImageView
-                    android:id="@+id/itemAddrIV"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginRight="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemTitleTV"
-                    app:srcCompat="@drawable/ic_parking_1" />
+                    <ImageView
+                        android:id="@+id/itemAddrIV"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginRight="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemTitleTV"
+                        app:srcCompat="@drawable/ic_parking_1" />
 
-                <ImageView
-                    android:id="@+id/itemCapacityIV"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginRight="16dp"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemAddrTV"
-                    app:srcCompat="@drawable/ic_car_1" />
+                    <ImageView
+                        android:id="@+id/itemCapacityIV"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="16dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemAddrTV"
+                        app:srcCompat="@drawable/ic_car_1" />
 
-                <ImageView
-                    android:id="@+id/itemFeeIV"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginRight="16dp"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemFeeTV"
-                    app:srcCompat="@drawable/ic_fee_1" />
+                    <ImageView
+                        android:id="@+id/itemFeeIV"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="16dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemFeeTV"
+                        app:srcCompat="@drawable/ic_fee_1" />
 
-                <ImageView
-                    android:id="@+id/itemTimesIV"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginRight="16dp"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemCapacityTV"
-                    app:srcCompat="@drawable/ic_car_time" />
+                    <ImageView
+                        android:id="@+id/itemTimesIV"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginRight="16dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemCapacityTV"
+                        app:srcCompat="@drawable/ic_car_time" />
 
-                <ImageView
-                    android:id="@+id/itemPicsIV"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemTimesIV"
-                    app:srcCompat="@drawable/ic_camera_1" />
+                    <ImageView
+                        android:id="@+id/itemPicsIV"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemTimesIV"
+                        app:srcCompat="@drawable/ic_camera_1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
     </androidx.cardview.widget.CardView>
 
