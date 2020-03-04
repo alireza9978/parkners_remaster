@@ -22,6 +22,15 @@ public class ServerClass {
 
     private static String TAG = "Server_class";
 
+    private static void printError(String from, VolleyError error) {
+        if (error != null) {
+            Log.i(TAG, "printError: " + from + " message :" + error.getMessage() + " code :" + error.networkResponse.statusCode);
+        } else {
+            Log.i(TAG, "printError: " + from + " null ");
+        }
+    }
+
+
     /**
      * بررسی اتصال به شبکه
      */
@@ -52,7 +61,7 @@ public class ServerClass {
     public static void createUser(final Context context) {
 
         String url = Constants.CREATE_USER;
-
+        Log.i(TAG, "createUser: start");
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
@@ -70,7 +79,7 @@ public class ServerClass {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        ServerClass.printError("createUser", error);
                     }
                 });
 
@@ -87,6 +96,7 @@ public class ServerClass {
         String url = Constants.ENTER_USER;
 
         String key = Constants.getKey(context);
+        Log.i(TAG, "enterUser: key: " + key);
         JSONObject temp = new JSONObject();
         try {
             temp.put("key", key);
@@ -104,7 +114,7 @@ public class ServerClass {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        ServerClass.printError("enterUser", error);
                     }
                 });
 

@@ -17,7 +17,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        if (Constants.getToken(getApplicationContext()).equals(Constants.NO_KEY))
+        if (Constants.getKey(getApplicationContext()).equals(Constants.NO_KEY))
             ServerClass.createUser(this);
         else
             ServerClass.enterUser(this);
