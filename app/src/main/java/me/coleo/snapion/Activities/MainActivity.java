@@ -99,6 +99,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        runOnUiThread(() -> {
+            map = findViewById(R.id.map);
+            map.getLayers().add(NeshanServices.createBaseMap(NeshanMapStyle.STANDARD_DAY));
+            focusOnUserLocation();
+            startLocationUpdates();
+        });
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         initLayoutReferences();
