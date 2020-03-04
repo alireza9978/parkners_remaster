@@ -33,7 +33,7 @@ public class ItemActivity extends AppCompatActivity {
         timesTV = findViewById(R.id.itemTimesTV);
         capTV = findViewById(R.id.itemCapacityTV);
 
-        addresTV.setText("asdmkl \n lkamsd \n kasmd\n lkmad;l");
+        addresTV.setText("asdmkl \n lkamsd \n kasmd\n lkmad;lasdmkl \n lkamsd \n kasmd\n lkmad;lasdmkl \n lkamsd \n kasmd\n lkmad;lasdmkl \n lkamsd \n kasmd\n lkmad;l");
 
 
         ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter();

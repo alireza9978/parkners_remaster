@@ -19,6 +19,6 @@ public class ItemSliderAdapter extends SliderAdapter {
 
     @Override
     public void onBindImageSlide(int position, ImageSlideViewHolder imageSlideViewHolder) {
-        imageSlideViewHolder.bindImageSlide(R.drawable.logo);
+        imageSlideViewHolder.bindImageSlide(R.drawable.screenshot);
     }
 }
