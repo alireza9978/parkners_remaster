@@ -6,13 +6,11 @@ import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
 
 public class ItemSliderAdapter extends SliderAdapter {
 
+    private int itemCt = 5;
+
     public void setItemCt(int itemCt) {
         this.itemCt = itemCt;
     }
-
-    private int itemCt=5;
-
-
 
     @Override
     public int getItemCount() {

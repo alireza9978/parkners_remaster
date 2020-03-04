@@ -1,7 +1,13 @@
 package me.coleo.snapion.Activities;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,12 +18,23 @@ import java.util.ArrayList;
 import me.coleo.snapion.R;
 import me.coleo.snapion.adapter.EndlessRecyclerViewScrollListener;
 import me.coleo.snapion.adapter.ParkingListAdapter;
+import me.coleo.snapion.constants.Constants;
 import me.coleo.snapion.models.Parking;
+import me.coleo.snapion.server.ServerClass;
 
 public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    private ImageView notFoundImage;
+    private TextView notFoundText;
+    private EditText searchBar;
+
     private ParkingListAdapter parkingListAdapter;
+    private ArrayList<Parking> parkingArrayList = new ArrayList<>();
+    private Constants.SearchMode mode;
+    private double lat;
+    private double lng;
+    private int page = 1;
 
 
     @Override
@@ -25,8 +42,45 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        Bundle extra = getIntent().getExtras();
+        assert extra != null;
+        mode = (Constants.SearchMode) extra.get(Constants.SEARCH_MODE);
+        if (mode == Constants.SearchMode.location) {
+            lat = extra.getDouble(Constants.SEARCH_LAT);
+            lng = extra.getDouble(Constants.SEARCH_LNG);
+        }
 
-        recyclerView = findViewById(R.id.parking_list);
+        initViews();
+        initScroller();
+
+        if (mode == Constants.SearchMode.location) {
+            ServerClass.aroundParking(this, lat, lng, parkingArrayList, page);
+            searchBar.setText("اطراف شما");
+            searchBar.setActivated(false);
+        } else {
+            hideNotFound();
+            searchBar.setHint("تایپ کنید...");
+            searchBar.addTextChangedListener(new TextWatcher() {
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+                }
+            });
+        }
+
+    }
+
+    private void initScroller() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
@@ -39,16 +93,33 @@ public class SearchActivity extends AppCompatActivity {
         };
 
         recyclerView.addOnScrollListener(listener);
-
-        ArrayList<Parking> parkingArrayList = new ArrayList<>();
-        parkingArrayList.add(new Parking("آلتون", "خیابان دانشگاه بعد چهارراه دوم پلاک ۱۲۳ طبقه ی منفی ۱۲", 15f, 3.5f));
-        parkingArrayList.add(new Parking("آلتون", "خیابان دانشگاه بعد چهارراه دوم پلاک ۱۲۳ طبقه ی منفی ۱۲", 35f, 3.5f));
-        parkingArrayList.add(new Parking("آلتون", "خیابان دانشگاه بعد چهارراه دوم پلاک ۱۲۳ طبقه ی منفی ۱۲", 55f, 3.5f));
-        parkingArrayList.add(new Parking("آلتون", "خیابان دانشگاه بعد چهارراه دوم پلاک ۱۲۳ طبقه ی منفی ۱۲", 75f, 3.5f));
-        parkingArrayList.add(new Parking("آلتون", "خیابان دانشگاه بعد چهارراه دوم پلاک ۱۲۳ طبقه ی منفی ۱۲", 95f, 3.5f));
-
-        parkingListAdapter = new ParkingListAdapter(parkingArrayList, getApplicationContext());
-        recyclerView.setAdapter(parkingListAdapter);
-
     }
+
+    private void initViews() {
+        recyclerView = findViewById(R.id.parking_list);
+        notFoundImage = findViewById(R.id.not_found_image_id);
+        notFoundText = findViewById(R.id.not_found_text_id);
+        searchBar = findViewById(R.id.search_box_edit_text);
+    }
+
+    public void loadParkingFromServer() {
+        if (parkingArrayList.isEmpty()) {
+            showNotFound();
+        } else {
+            hideNotFound();
+            parkingListAdapter = new ParkingListAdapter(parkingArrayList, getApplicationContext());
+            recyclerView.setAdapter(parkingListAdapter);
+        }
+    }
+
+    private void showNotFound() {
+        notFoundText.setVisibility(View.VISIBLE);
+        notFoundImage.setVisibility(View.VISIBLE);
+    }
+
+    private void hideNotFound() {
+        notFoundText.setVisibility(View.INVISIBLE);
+        notFoundImage.setVisibility(View.INVISIBLE);
+    }
+
 }

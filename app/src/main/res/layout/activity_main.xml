@@ -14,8 +14,9 @@
 
     <ImageButton
         android:id="@+id/pin_button"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/ic_location_pin"
         android:contentDescription="@string/pin_button"
         app:layout_constraintBottom_toTopOf="@id/bottom_bar"

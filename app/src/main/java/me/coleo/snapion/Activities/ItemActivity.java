@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import me.coleo.snapion.R;
 import me.coleo.snapion.adapter.ItemImageLoadingService;
 import me.coleo.snapion.adapter.ItemSliderAdapter;
@@ -11,7 +12,7 @@ import ss.com.bannerslider.Slider;
 
 public class ItemActivity extends AppCompatActivity {
 
-    TextView addresTV,feeTV,capTV,timesTV , titleTV;
+    TextView addresTV, feeTV, capTV, timesTV, titleTV;
     Slider slider;
 
     @Override
@@ -37,10 +38,11 @@ public class ItemActivity extends AppCompatActivity {
 
         ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter();
         slider.setAdapter(itemSliderAdapter);
-        slider.setSelectedSlide(itemSliderAdapter.getItemCount()-1,false);
+        slider.setSelectedSlide(itemSliderAdapter.getItemCount() - 1, false);
     }
 
 
-    private void putPinOnMap(int lat,int lang){}
+    private void putPinOnMap(int lat, int lang) {
+    }
 
 }

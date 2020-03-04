@@ -1,6 +1,5 @@
 package me.coleo.snapion.adapter;
 
-import android.content.Context;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
