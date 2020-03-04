@@ -2,6 +2,7 @@ package me.coleo.snapion.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,12 +18,16 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        if (Constants.getKey(getApplicationContext()).equals(Constants.NO_KEY))
-            ServerClass.createUser(this);
-        else
-            ServerClass.enterUser(this);
+        if (!ServerClass.isNetworkConnected(getApplicationContext())) {
+            Toast.makeText(getApplicationContext(), R.string.network_connection, Toast.LENGTH_LONG).show();
+        } else {
+            if (Constants.getKey(getApplicationContext()).equals(Constants.NO_KEY))
+                ServerClass.createUser(this);
+            else
+                ServerClass.enterUser(this);
 
-
+            goToMain();
+        }
     }
 
     public void goToMain() {

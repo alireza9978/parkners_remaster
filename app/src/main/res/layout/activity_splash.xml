@@ -7,41 +7,19 @@
     android:background="@android:color/black"
     tools:context=".Activities.SplashActivity">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/lightCV1"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="68dp"
-        app:cardBackgroundColor="#FFFFFF"
-        app:cardCornerRadius="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/lightCV2" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/lightCV3"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="68dp"
-        app:cardBackgroundColor="#909090"
-        app:cardCornerRadius="100dp"
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.ThreeBounce"
+        app:layout_constraintTop_toBottomOf="@id/splashTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/lightCV2" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:SpinKit_Color="@color/colorAccent" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/lightCV2"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="16dp"
-        app:cardBackgroundColor="#909090"
-        app:cardCornerRadius="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/splashTV" />
 
     <ImageView
         android:id="@+id/imageView"

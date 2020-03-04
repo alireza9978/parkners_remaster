@@ -14,5 +14,7 @@
     <string name="find_route">find route</string>
     <string name="pin_button">pin_button</string>
     <string name="not_found">پارکینگی پیدا نشد :(</string>
+    <string name="network_connection">اتصال خود به اينترنت را بررسي نماييد</string>
+
 
 </resources>
