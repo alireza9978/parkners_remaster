@@ -1,9 +1,12 @@
 package me.coleo.snapion.server;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
@@ -34,6 +37,42 @@ public class ServerClass {
         }
     }
 
+    private static String getErrorMessage(VolleyError error) {
+        String temp = new String(error.networkResponse.data);
+        try {
+            JSONObject json = new JSONObject(temp);
+            JSONObject messagesObject = json.getJSONObject("messages");
+            JSONArray errorsArray = messagesObject.getJSONArray("error");
+            temp = errorsArray.getJSONObject(0).getString("body");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            temp = "خطای نامشخص";
+        }
+        return temp;
+    }
+
+    private static void handleError(Context context, VolleyError error) {
+        error.printStackTrace();
+        if (error.networkResponse == null) {
+            Toast.makeText(context, "اتصال اینترنت خود را بررسی کنید", Toast.LENGTH_SHORT).show();
+        } else {
+            if (error.networkResponse.statusCode == 403) {
+                Toast.makeText(context, "کلید شما منقضی شده", Toast.LENGTH_SHORT).show();
+                Constants.setToken(context, "");
+                Intent intent = new Intent(context, SplashActivity.class);
+                context.startActivity(intent);
+                ((Activity) context).finish();
+                return;
+            }
+            if (error.networkResponse.statusCode != 417) {
+                error.printStackTrace();
+                Toast.makeText(context, getErrorMessage(error), Toast.LENGTH_LONG).show();
+            } else {
+                error.printStackTrace();
+                Toast.makeText(context, getErrorMessage(error), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     /**
      * بررسی اتصال به شبکه
@@ -128,24 +167,29 @@ public class ServerClass {
             e.printStackTrace();
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url, temp, response -> {
-                    saveToken(context, response);
-                    try {
-                        JSONArray parkingArray = response.getJSONArray("parkings");
-                        Gson gson = new Gson();
-                        for (int i = 0; i < parkingArray.length(); i++) {
-                            JSONObject parking = parkingArray.getJSONObject(i);
-                            parkings.add(gson.fromJson(parking.toString(), Parking.class));
+        ObjectRequest jsonObjectRequest = new ObjectRequest
+                (context, Request.Method.POST, url, temp,
+                        response -> {
+                            saveToken(context, response);
+                            try {
+                                JSONArray parkingArray = response.getJSONArray("parkings");
+                                Gson gson = new Gson();
+                                for (int i = 0; i < parkingArray.length(); i++) {
+                                    JSONObject parking = parkingArray.getJSONObject(i);
+                                    parkings.add(gson.fromJson(parking.toString(), Parking.class));
+                                }
+                                for (Parking parking : parkings) {
+                                    Log.i(TAG, "aroundParking: " + parking.toString());
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            ((SearchActivity) context).loadParkingFromServer();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    ((SearchActivity) context).loadParkingFromServer();
-                }, error -> ServerClass.printError("enterUser", error));
+                        , error ->
+                        ServerClass.printError("enterUser", error));
 
 
-        // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
     }

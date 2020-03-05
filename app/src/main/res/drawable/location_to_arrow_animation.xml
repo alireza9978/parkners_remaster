@@ -4,13 +4,13 @@
     xmlns:aapt="http://schemas.android.com/aapt">
     <aapt:attr name="android:drawable">
         <vector
-            android:name="vector"
+            android:title="vector"
             android:width="22dp"
             android:height="22dp"
             android:viewportWidth="22"
             android:viewportHeight="22">
             <path
-                android:name="path"
+                android:title="path"
                 android:pathData="M 11 7 C 8.79 7 7 8.79 7 11 C 7 13.21 8.79 15 11 15 C 13.21 15 15 13.21 15 11 C 15 8.79 13.21 7 11 7 Z M 19.94 10 C 19.48 5.83 16.17 2.52 12 2.06 L 12 0 L 10 0 L 10 2.06 C 5.83 2.52 2.52 5.83 2.06 10 L 0 10 L 0 12 L 2.06 12 C 2.52 16.17 5.83 19.48 10 19.94 L 10 22 L 12 22 L 12 19.94 C 16.17 19.48 19.48 16.17 19.94 12 L 22 12 L 22 10 L 19.94 10 Z M 11 18 C 7.13 18 4 14.87 4 11 C 4 7.13 7.13 4 11 4 C 14.87 4 18 7.13 18 11 C 18 14.87 14.87 18 11 18 Z"
                 android:fillColor="#000000"
                 android:strokeWidth="1"/>

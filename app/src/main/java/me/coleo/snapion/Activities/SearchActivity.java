@@ -48,6 +48,12 @@ public class SearchActivity extends AppCompatActivity {
         if (mode == Constants.SearchMode.location) {
             lat = extra.getDouble(Constants.SEARCH_LAT);
             lng = extra.getDouble(Constants.SEARCH_LNG);
+        } else {
+            boolean exist = extra.containsKey(Constants.HAVE_lATLNG);
+            if (exist) {
+                lat = extra.getDouble(Constants.SEARCH_LAT);
+                lng = extra.getDouble(Constants.SEARCH_LNG);
+            }
         }
 
         initViews();
@@ -57,6 +63,7 @@ public class SearchActivity extends AppCompatActivity {
             ServerClass.aroundParking(this, lat, lng, parkingArrayList, page);
             searchBar.setText("اطراف شما");
             searchBar.setActivated(false);
+            //todo make it text view
         } else {
             hideNotFound();
             searchBar.setHint("تایپ کنید...");

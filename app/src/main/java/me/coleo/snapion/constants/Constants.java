@@ -27,16 +27,18 @@ public class Constants {
     private static String HAVE_USER = "asdzxcwdwdwd";
     private static String USER_KEY = "neverTryThis";
 
-    public static String PARKING_ID = "parkingson";
     public static String SEARCH_MODE = "SEASsdas";
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 10810;
     public static String SEARCH_LAT = "SEASsdxzcs";
+    public static String SEARCH_LNG = "SEASsda111wxzs";
+    public static String HAVE_lATLNG = "SE321rcd11wxzs";
+
+    public static String PARKING_ID = "parkingson";
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 10810;
 
     private static String BASE_URL = "http://dev2.parkners.com/api/av1/";
     public static String CREATE_USER_URL = BASE_URL + "users/create";
     public static String ENTER_USER_URL = BASE_URL + "users/enter";
     public static String AROUND_PARKING_URL = BASE_URL + "parkings/around_point";
-    public static String SEARCH_LNG = "SEASsda111wxzs";
 
     /**
      * گرفتن کلید ارتباط با سرور

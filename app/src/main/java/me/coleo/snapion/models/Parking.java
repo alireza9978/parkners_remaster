@@ -1,85 +1,100 @@
 package me.coleo.snapion.models;
 
+import java.util.ArrayList;
+
 public class Parking {
 
     private int id;
-    private String name;
-    private String address;
-    private float progress;
-    private float distance;
-    private float lat;
-    private float lng;
+    private String title;
+    private String address_text;
+    private float total_capacity;
+    private float address_latitude;
+    private float address_longitude;
+    private ArrayList<Details> payment_texts;
+    private ArrayList<Details> working_detail_texts;
+    private ArrayList<Image> images;
 
-    public Parking(String name, String address, float progress, float distance) {
-        this.name = name;
-        this.address = address;
-        this.progress = progress;
-        this.distance = distance;
+    @Override
+    public String toString() {
+        return "Parking{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", address_text='" + address_text + '\'' +
+                ", total_capacity=" + total_capacity +
+                ", address_latitude=" + address_latitude +
+                ", address_longitude=" + address_longitude +
+                '}';
     }
 
-    public Parking(int id, String name, String address, float progress, float distance, float lat, float lng) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.progress = progress;
-        this.distance = distance;
-        this.lat = lat;
-        this.lng = lng;
+    public ArrayList<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(ArrayList<Image> images) {
+        this.images = images;
     }
 
     public int getId() {
         return id;
     }
 
-    public float getLat() {
-        return lat;
+    public float getAddress_latitude() {
+        return address_latitude;
     }
 
-    public void setLat(float lat) {
-        this.lat = lat;
+    public void setAddress_latitude(float address_latitude) {
+        this.address_latitude = address_latitude;
     }
 
-    public float getLng() {
-        return lng;
+    public float getAddress_longitude() {
+        return address_longitude;
     }
 
-    public void setLng(float lng) {
-        this.lng = lng;
+    public void setAddress_longitude(float address_longitude) {
+        this.address_longitude = address_longitude;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getAddress() {
-        return address;
+    public String getAddress_text() {
+        return address_text;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress_text(String address_text) {
+        this.address_text = address_text;
     }
 
-    public float getProgress() {
-        return progress;
+    public float getTotal_capacity() {
+        return total_capacity;
     }
 
-    public void setProgress(float progress) {
-        this.progress = progress;
+    public void setTotal_capacity(float total_capacity) {
+        this.total_capacity = total_capacity;
     }
 
-    public float getDistance() {
-        return distance;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setDistance(float distance) {
-        this.distance = distance;
+    public ArrayList<Details> getPayment_texts() {
+        return payment_texts;
     }
 
-    public String getDistanceString() {
-        return distance + "KM";
+    public void setPayment_texts(ArrayList<Details> payment_texts) {
+        this.payment_texts = payment_texts;
+    }
+
+    public ArrayList<Details> getWorking_detail_texts() {
+        return working_detail_texts;
+    }
+
+    public void setWorking_detail_texts(ArrayList<Details> working_detail_texts) {
+        this.working_detail_texts = working_detail_texts;
     }
 }

@@ -41,12 +41,13 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ParkingViewHolder holder, int position) {
         Parking parking = parkingArrayList.get(position);
-        holder.parkingName.setText(parking.getName());
-        holder.progressBar.init(parking.getProgress());
-        holder.parkingAddress.setText(parking.getAddress());
-        holder.distance.setText(parking.getDistanceString());
+        holder.parkingName.setText(parking.getTitle());
+        holder.progressBar.init(parking.getTotal_capacity());
+        holder.parkingAddress.setText(parking.getAddress_text());
+//        holder.distance.setText(parking.get());
+        //todo distance
         holder.route.setOnClickListener(v -> {
-            Uri gmmIntentUri = Uri.parse("google.navigation:q=" + parking.getLat() + "," + parking.getLng() + "&mode=d");
+            Uri gmmIntentUri = Uri.parse("google.navigation:q=" + parking.getAddress_latitude() + "," + parking.getAddress_longitude() + "&mode=d");
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.setPackage("com.google.android.apps.maps");
             context.startActivity(mapIntent);

@@ -321,7 +321,13 @@ public class MainActivity extends AppCompatActivity {
     private void openSearchPage() {
         Intent i = new Intent(MainActivity.this, SearchActivity.class);
         i.putExtra(Constants.SEARCH_MODE, Constants.SearchMode.search);
-
+        if (userLocation != null) {
+            i.putExtra(Constants.HAVE_lATLNG, true);
+            i.putExtra(Constants.SEARCH_LAT, userLocation.getLatitude());
+            i.putExtra(Constants.SEARCH_LNG, userLocation.getLongitude());
+        } else {
+            i.putExtra(Constants.HAVE_lATLNG, false);
+        }
         startTransition(i);
     }
 
