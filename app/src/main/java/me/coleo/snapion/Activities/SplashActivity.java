@@ -19,14 +19,13 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         if (!ServerClass.isNetworkConnected(getApplicationContext())) {
-            Toast.makeText(getApplicationContext(), R.string.network_connection, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "اتصال اینترنت خود را بررسی کنید", Toast.LENGTH_LONG).show();
         } else {
             if (Constants.getKey(getApplicationContext()).equals(Constants.NO_KEY))
                 ServerClass.createUser(this);
             else
                 ServerClass.enterUser(this);
 
-            goToMain();
         }
     }
 

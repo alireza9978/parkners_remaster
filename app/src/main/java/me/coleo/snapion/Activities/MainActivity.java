@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private Button findLocation;
     private Button searchBar;
     private ImageButton pinButton;
+    private ImageButton logoButton;
     private ConstraintLayout bottomLayout;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
     final Context context = this;
@@ -260,6 +261,10 @@ public class MainActivity extends AppCompatActivity {
         searchBar.setOnClickListener(v -> openSearchPage());
         search.setOnClickListener(v -> openSearchPage());
         findLocation.setOnClickListener(v -> getLastLocation());
+        logoButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SupportActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void initViews() {
@@ -269,6 +274,7 @@ public class MainActivity extends AppCompatActivity {
         searchBar = findViewById(R.id.search_box_edit_text);
         bottomLayout = findViewById(R.id.search_bar_container);
         pinButton = findViewById(R.id.pin_button);
+        logoButton = findViewById(R.id.parkners_icon);
     }
 
     public void focusOnUserLocation() {
