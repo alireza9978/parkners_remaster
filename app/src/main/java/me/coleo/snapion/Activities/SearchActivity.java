@@ -63,6 +63,12 @@ public class SearchActivity extends AppCompatActivity {
         initScroller();
 
 
+
+
+
+        parkingListAdapter = new ParkingListAdapter(parkingArrayList, getApplicationContext());
+        recyclerView.setAdapter(parkingListAdapter);
+
         if (mode == Constants.SearchMode.location) {
             ServerClass.aroundParking(this, lat, lng, mode, null, parkingArrayList, page);
             searchBar.setText("اطراف شما");
@@ -92,6 +98,7 @@ public class SearchActivity extends AppCompatActivity {
             });
         }
 
+
     }
 
     private void initScroller() {
@@ -99,13 +106,16 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
 
+
         EndlessRecyclerViewScrollListener listener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 Log.i("Search_page", "onLoadMore: page " + page + " , totalItemCount " + totalItemsCount);
                 //todo request next page
+                ServerClass.aroundParking(SearchActivity.this , lat, lng, mode, textToSearch, parkingArrayList, page);
             }
         };
+
 
         recyclerView.addOnScrollListener(listener);
 
@@ -124,8 +134,9 @@ public class SearchActivity extends AppCompatActivity {
             showNotFound();
         } else {
             hideNotFound();
-            parkingListAdapter = new ParkingListAdapter(parkingArrayList, getApplicationContext());
-            recyclerView.setAdapter(parkingListAdapter);
+//            parkingListAdapter = new ParkingListAdapter(parkingArrayList, getApplicationContext());
+//            recyclerView.setAdapter(parkingListAdapter);
+            recyclerView.getAdapter().notifyDataSetChanged();
             System.gc();
         }
     }
