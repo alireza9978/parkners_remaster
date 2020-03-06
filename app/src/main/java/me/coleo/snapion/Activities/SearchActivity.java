@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ public class SearchActivity extends AppCompatActivity {
     private ImageView notFoundImage;
     private TextView notFoundText;
     private EditText searchBar;
+    private Button findButton;
 
     private ParkingListAdapter parkingListAdapter;
     private ArrayList<Parking> parkingArrayList = new ArrayList<>();
@@ -36,6 +38,7 @@ public class SearchActivity extends AppCompatActivity {
     private double lng;
     private int page = 1;
 
+    private String textToSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +63,8 @@ public class SearchActivity extends AppCompatActivity {
         initScroller();
 
 
-
         if (mode == Constants.SearchMode.location) {
-            ServerClass.aroundParking(this, lat, lng, parkingArrayList, page);
+            ServerClass.aroundParking(this, lat, lng, mode, null, parkingArrayList, page);
             searchBar.setText("اطراف شما");
             searchBar.setActivated(false);
             //todo make it text view
@@ -84,6 +86,9 @@ public class SearchActivity extends AppCompatActivity {
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                 }
             });
+            findButton.setOnClickListener(v -> {
+                ServerClass.aroundParking(this, lat, lng, mode, textToSearch, parkingArrayList, page);
+            });
         }
 
     }
@@ -97,10 +102,12 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 Log.i("Search_page", "onLoadMore: page " + page + " , totalItemCount " + totalItemsCount);
+                //todo request next page
             }
         };
 
         recyclerView.addOnScrollListener(listener);
+
     }
 
     private void initViews() {
@@ -108,6 +115,7 @@ public class SearchActivity extends AppCompatActivity {
         notFoundImage = findViewById(R.id.not_found_image_id);
         notFoundText = findViewById(R.id.not_found_text_id);
         searchBar = findViewById(R.id.search_box_edit_text);
+        findButton = findViewById(R.id.search_button);
     }
 
     public void loadParkingFromServer() {
@@ -117,6 +125,7 @@ public class SearchActivity extends AppCompatActivity {
             hideNotFound();
             parkingListAdapter = new ParkingListAdapter(parkingArrayList, getApplicationContext());
             recyclerView.setAdapter(parkingListAdapter);
+            System.gc();
         }
     }
 

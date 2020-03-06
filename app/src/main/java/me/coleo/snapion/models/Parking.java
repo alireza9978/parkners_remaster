@@ -10,6 +10,7 @@ public class Parking {
     private float total_capacity;
     private float address_latitude;
     private float address_longitude;
+    private String distance;
     private ArrayList<Details> payment_texts;
     private ArrayList<Details> working_detail_texts;
     private ArrayList<Image> images;
@@ -23,7 +24,16 @@ public class Parking {
                 ", total_capacity=" + total_capacity +
                 ", address_latitude=" + address_latitude +
                 ", address_longitude=" + address_longitude +
+                ", distance='" + distance + '\'' +
                 '}';
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 
     public ArrayList<Image> getImages() {

@@ -153,16 +153,22 @@ public class ServerClass {
     /**
      * گرفتن پارکینگ ها بر اساس لوکیشن
      */
-    public static void aroundParking(Context context, double lat, double lng, ArrayList<Parking> parkings, int page) {
+    public static void aroundParking(Context context, double lat, double lng,
+                                     Constants.SearchMode mode, String search,
+                                     ArrayList<Parking> parkings, int page) {
 
         String url = Constants.AROUND_PARKING_URL;
-        url += "?page=" + page;
 
         Log.i(TAG, "around parking");
         JSONObject temp = new JSONObject();
         try {
             temp.put("latitude", lat);
             temp.put("longitude", lng);
+            temp.put("page", page);
+            if (mode != Constants.SearchMode.location) {
+                temp.put("search", search);
+            }
+            temp.put("page_size", 10);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -176,6 +182,7 @@ public class ServerClass {
                                 Gson gson = new Gson();
                                 for (int i = 0; i < parkingArray.length(); i++) {
                                     JSONObject parking = parkingArray.getJSONObject(i);
+                                    Log.i(TAG, "aroundParking: " + parking.toString());
                                     parkings.add(gson.fromJson(parking.toString(), Parking.class));
                                 }
                                 for (Parking parking : parkings) {
@@ -194,49 +201,7 @@ public class ServerClass {
 
     }
 
-    /**
-     * يافتن پاركينگ ها بر اساس جستجوي كاربر
-     */
-    public static void textParking(Context context, double lat, double lng, ArrayList<Parking> parkings, int page) {
-
-        String url = Constants.TEXT_PARKING_URL;
-        url += "?page=" + page;
-
-        Log.i(TAG, "around parking");
-        JSONObject temp = new JSONObject();
-        try {
-            temp.put("latitude", lat);
-            temp.put("longitude", lng);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url, temp, response -> {
-                    saveToken(context, response);
-                    try {
-                        JSONArray parkingArray = response.getJSONArray("parkings");
-                        Gson gson = new Gson();
-                        for (int i = 0; i < parkingArray.length(); i++) {
-                            JSONObject parking = parkingArray.getJSONObject(i);
-                            parkings.add(gson.fromJson(parking.toString(), Parking.class));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    ((SearchActivity) context).loadParkingFromServer();
-                }, error -> ServerClass.printError("textParking", error));
-
-
-        // Access the RequestQueue through your singleton class.
-        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
-
-    }
-
-
-
-    public void sendComment(Context context,String comment){
-
+    public void sendComment(Context context, String comment) {
 
 
         String url = Constants.TEXT_PARKING_URL;
