@@ -1,5 +1,7 @@
 package me.coleo.snapion.adapter;
 
+import java.util.ArrayList;
+
 import me.coleo.snapion.R;
 import ss.com.bannerslider.adapters.SliderAdapter;
 import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
@@ -7,8 +9,17 @@ import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
 public class ItemSliderAdapter extends SliderAdapter {
 
     private int itemCt = 5;
+    ArrayList<String> imageURLs;
 
-    public void setItemCt(int itemCt) {
+    public ItemSliderAdapter(ArrayList<String> imageURLs) {
+        this.imageURLs = imageURLs;
+        this.itemCt = imageURLs.size();
+    }
+
+    public ItemSliderAdapter() {
+    }
+
+    public void setItemCt(int itemCt){
         this.itemCt = itemCt;
     }
 
@@ -19,6 +30,6 @@ public class ItemSliderAdapter extends SliderAdapter {
 
     @Override
     public void onBindImageSlide(int position, ImageSlideViewHolder imageSlideViewHolder) {
-        imageSlideViewHolder.bindImageSlide(R.drawable.screenshot);
+        imageSlideViewHolder.bindImageSlide(imageURLs.get(position));
     }
 }

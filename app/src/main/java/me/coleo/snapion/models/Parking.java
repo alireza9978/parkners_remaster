@@ -108,4 +108,34 @@ public class Parking implements Serializable {
     public void setWorking_detail_texts(ArrayList<Details> working_detail_texts) {
         this.working_detail_texts = working_detail_texts;
     }
+
+
+    public String getPricesString(){
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < payment_texts.size(); i++) {
+            result.append(payment_texts.get(i).getText());
+            result.append("\n");
+        }
+        return result.toString();
+    }
+
+
+    public String getWorkHoursString(){
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < working_detail_texts.size(); i++) {
+            result.append(working_detail_texts.get(i).getText());
+            result.append("\n");
+        }
+        return result.toString();
+    }
+
+
+    public ArrayList<String> getImageURLs(){
+        ArrayList<String> result = new ArrayList<>();
+        for (int i = 0; i < images.size(); i++) {
+            result.add(images.get(i).getImage().getFile());
+        }
+        return result;
+    }
+
 }

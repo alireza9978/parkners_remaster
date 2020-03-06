@@ -21,10 +21,6 @@ public class ItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
-        Bundle extra = getIntent().getExtras();
-        assert extra != null;
-        Parking parking = (Parking) extra.getSerializable(Constants.PARKING_ID);
-        //todo get parking info
 
         Slider.init(new ItemImageLoadingService());
 
@@ -36,10 +32,32 @@ public class ItemActivity extends AppCompatActivity {
         timesTV = findViewById(R.id.itemTimesTV);
         capTV = findViewById(R.id.itemCapacityTV);
 
-        addresTV.setText("asdmkl \n lkamsd \n kasmd\n lkmad;lasdmkl \n lkamsd \n kasmd\n lkmad;lasdmkl \n lkamsd \n kasmd\n lkmad;lasdmkl \n lkamsd \n kasmd\n lkmad;l");
 
+        Bundle extra = getIntent().getExtras();
+        assert extra != null;
+        Parking parking;
+        try {
+
+            parking = (Parking) extra.getSerializable(Constants.PARKING_ID);
+            assert parking != null;
+
+
+            titleTV.setText(parking.getTitle());
+            addresTV.setText(parking.getAddress_text());
+            feeTV.setText(parking.getPricesString());
+            timesTV.setText(parking.getWorkHoursString());
+            capTV.setText(String.valueOf(parking.getTotal_capacity()));
+            ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter(parking.getImageURLs());
+
+        }catch (NullPointerException e){}
+
+
+
+
+        //todo get parking info
 
         ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter();
+
         slider.setAdapter(itemSliderAdapter);
         slider.setSelectedSlide(itemSliderAdapter.getItemCount() - 1, false);
     }
@@ -47,5 +65,7 @@ public class ItemActivity extends AppCompatActivity {
 
     private void putPinOnMap(int lat, int lang) {
     }
+
+
 
 }
