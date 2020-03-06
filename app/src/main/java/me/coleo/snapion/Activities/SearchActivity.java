@@ -59,6 +59,8 @@ public class SearchActivity extends AppCompatActivity {
         initViews();
         initScroller();
 
+
+
         if (mode == Constants.SearchMode.location) {
             ServerClass.aroundParking(this, lat, lng, parkingArrayList, page);
             searchBar.setText("اطراف شما");
@@ -71,6 +73,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
+
                 }
 
                 @Override
@@ -79,8 +82,6 @@ public class SearchActivity extends AppCompatActivity {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
                 }
             });
         }

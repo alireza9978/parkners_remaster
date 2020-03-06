@@ -15,6 +15,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:background="@android:color/white"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,6 +25,104 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/mapCL"
+                android:layout_width="match_parent"
+                android:layout_height="284dp"
+                android:background="@android:color/white"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="284dp"
+                    android:background="@color/colorMapItemBack"
+                    android:elevation="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <org.neshan.ui.MapView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/mdm"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@android:color/transparent"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="0.0px"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="30dp"
+                        app:cardPreventCornerOverlap="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <ImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/share_item_back"
+                            android:contentDescription="@string/find_route"
+                            android:fadingEdgeLength="1dp"
+                            android:src="@drawable/item_share" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@android:color/transparent"
+                        android:backgroundTint="@android:color/transparent"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="0.0px"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="24dp"
+                        app:cardMaxElevation="24dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageButton
+                            android:id="@+id/route_button"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/back_button_bg_item_layout"
+                            android:contentDescription="@string/find_route"
+                            android:fadingEdgeLength="1dp"
+                            android:src="@drawable/ic_back_arrow" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/mm"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@android:color/white"
+                        android:divider="@android:color/transparent"
+                        android:dividerHeight="0.0px"
+                        app:cardElevation="30dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <ImageButton
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/routing_item_back"
+                            android:contentDescription="@string/find_route"
+                            android:fadingEdgeLength="1dp"
+                            android:src="@drawable/ic_routing_icon" />
+                    </androidx.cardview.widget.CardView>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
 
             <ScrollView
                 android:layout_width="0dp"
@@ -45,6 +144,7 @@
                         android:layout_width="0dp"
                         android:layout_height="150dp"
                         android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/itemPicsIV"
                         app:layout_constraintStart_toStartOf="parent"
@@ -151,110 +251,6 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/mapCL"
-                android:layout_width="match_parent"
-                android:layout_height="284dp"
-                android:background="@drawable/item_map_back"
-                android:elevation="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/item_map_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorPrimary" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <org.neshan.ui.MapView
-                    android:id="@+id/map"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/item_map_back" />
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/mdm"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:backgroundTint="@android:color/transparent"
-                    android:divider="@android:color/transparent"
-                    android:dividerHeight="0.0px"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardElevation="30dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
-
-                    <ImageButton
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/share_item_back"
-                        android:contentDescription="@string/find_route"
-                        android:fadingEdgeLength="1dp"
-                        android:src="@drawable/item_share" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:backgroundTint="@android:color/transparent"
-                    android:divider="@android:color/transparent"
-                    android:dividerHeight="0.0px"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardElevation="24dp"
-                    app:cardMaxElevation="24dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageButton
-                        android:id="@+id/route_button"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/back_button_bg_item_layout"
-                        android:contentDescription="@string/find_route"
-                        android:fadingEdgeLength="1dp"
-                        android:src="@drawable/ic_back_arrow" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/mm"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@android:color/transparent"
-                    android:backgroundTint="@android:color/transparent"
-                    android:divider="@android:color/transparent"
-                    android:dividerHeight="0.0px"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardElevation="30dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <ImageButton
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/routing_item_back"
-                        android:contentDescription="@string/find_route"
-                        android:fadingEdgeLength="1dp"
-                        android:src="@drawable/ic_routing_icon" />
-                </androidx.cardview.widget.CardView>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -39,6 +39,8 @@ public class Constants {
     public static String CREATE_USER_URL = BASE_URL + "users/create";
     public static String ENTER_USER_URL = BASE_URL + "users/enter";
     public static String AROUND_PARKING_URL = BASE_URL + "parkings/around_point";
+    public static String TEXT_PARKING_URL = BASE_URL + "parkings/around_point";//todo edit url
+    public static String COMMENT_URL = BASE_URL + "parkings/around_point";//todo edit url
 
     /**
      * گرفتن کلید ارتباط با سرور
@@ -55,6 +57,7 @@ public class Constants {
         SharedPreferences sharedPreferences = context.getSharedPreferences(TOKEN_STORAGE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(TOKEN_DATA, token);
+        //todo why are you calling both apply and commit? :| just add .commit to previous line and you're done.
         editor.apply();
         editor.commit();
     }
