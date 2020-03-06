@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import me.coleo.snapion.R;
 import me.coleo.snapion.adapter.ItemImageLoadingService;
 import me.coleo.snapion.adapter.ItemSliderAdapter;
+import me.coleo.snapion.constants.Constants;
+import me.coleo.snapion.models.Parking;
 import ss.com.bannerslider.Slider;
 
 public class ItemActivity extends AppCompatActivity {
@@ -21,8 +23,9 @@ public class ItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item);
         Bundle extra = getIntent().getExtras();
         assert extra != null;
-//        final int id = extra.getInt(Constants.PARKING_ID);
+        Parking parking = (Parking) extra.getSerializable(Constants.PARKING_ID);
         //todo get parking info
+
         Slider.init(new ItemImageLoadingService());
 
         slider = findViewById(R.id.itemSlider);

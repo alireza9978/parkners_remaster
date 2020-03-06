@@ -1,6 +1,8 @@
 package me.coleo.snapion.models;
 
-public class Details {
+import java.io.Serializable;
+
+public class Details implements Serializable {
 
     private int id;
     private int order;

@@ -1,6 +1,8 @@
 package me.coleo.snapion.models;
 
-public class Image {
+import java.io.Serializable;
+
+public class Image implements Serializable {
 
     private int id;
     private int order;
@@ -31,7 +33,7 @@ public class Image {
     }
 }
 
-class InternalImage {
+class InternalImage implements Serializable {
 
     private int id;
     private String file;

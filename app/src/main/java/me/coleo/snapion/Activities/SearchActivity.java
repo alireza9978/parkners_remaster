@@ -88,6 +88,7 @@ public class SearchActivity extends AppCompatActivity {
             });
             findButton.setOnClickListener(v -> {
                 ServerClass.aroundParking(this, lat, lng, mode, textToSearch, parkingArrayList, page);
+                //todo search here
             });
         }
 

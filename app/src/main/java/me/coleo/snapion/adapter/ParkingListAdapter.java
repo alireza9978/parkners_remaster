@@ -43,8 +43,9 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
         Parking parking = parkingArrayList.get(position);
         holder.parkingName.setText(parking.getTitle());
 //        holder.progressBar.init(parking.getTotal_capacity());
+        //todo pay some attention
         holder.parkingAddress.setText(parking.getAddress_text());
-        holder.distance.setText(parking.getDistance());
+        holder.distance.setText(parking.getDistance() + "M");
         holder.route.setOnClickListener(v -> {
             Uri gmmIntentUri = Uri.parse("google.navigation:q=" + parking.getAddress_latitude() + "," + parking.getAddress_longitude() + "&mode=d");
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
@@ -53,7 +54,7 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
         });
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ItemActivity.class);
-            intent.putExtra(Constants.PARKING_ID, parking.getId());
+            intent.putExtra(Constants.PARKING_ID, parking);
             context.startActivity(intent);
         });
     }
