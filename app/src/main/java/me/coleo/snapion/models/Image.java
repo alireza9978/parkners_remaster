@@ -2,6 +2,8 @@ package me.coleo.snapion.models;
 
 import java.io.Serializable;
 
+import me.coleo.snapion.constants.Constants;
+
 public class Image implements Serializable {
 
     private int id;
@@ -47,7 +49,7 @@ class InternalImage implements Serializable {
     }
 
     public String getFile() {
-        return file;
+        return Constants.BASE_MEDIA_URL + file;
     }
 
     public void setFile(String file) {

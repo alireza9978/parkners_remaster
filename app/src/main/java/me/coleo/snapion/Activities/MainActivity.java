@@ -165,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onMapClicked(ClickData mapClickInfo) {
                 super.onMapClicked(mapClickInfo);
-
             }
 
             /*            @Override

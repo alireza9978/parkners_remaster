@@ -1,9 +1,23 @@
 package me.coleo.snapion.Activities;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.neshan.core.LngLat;
+import org.neshan.layers.VectorElementLayer;
+import org.neshan.services.NeshanMapStyle;
+import org.neshan.services.NeshanServices;
+import org.neshan.styles.AnimationStyle;
+import org.neshan.styles.AnimationStyleBuilder;
+import org.neshan.styles.AnimationType;
+import org.neshan.styles.MarkerStyle;
+import org.neshan.styles.MarkerStyleCreator;
+import org.neshan.ui.MapView;
+import org.neshan.utils.BitmapUtils;
+import org.neshan.vectorelements.Marker;
 
 import me.coleo.snapion.R;
 import me.coleo.snapion.adapter.ItemImageLoadingService;
@@ -16,6 +30,7 @@ public class ItemActivity extends AppCompatActivity {
 
     TextView addresTV, feeTV, capTV, timesTV, titleTV;
     Slider slider;
+    MapView map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +39,8 @@ public class ItemActivity extends AppCompatActivity {
 
         Slider.init(new ItemImageLoadingService());
 
+        map = findViewById(R.id.map);
+
         slider = findViewById(R.id.itemSlider);
 
         addresTV = findViewById(R.id.itemAddrTV);
@@ -31,7 +48,6 @@ public class ItemActivity extends AppCompatActivity {
         titleTV = findViewById(R.id.itemTitleTV);
         timesTV = findViewById(R.id.itemTimesTV);
         capTV = findViewById(R.id.itemCapacityTV);
-
 
         Bundle extra = getIntent().getExtras();
         assert extra != null;
@@ -49,23 +65,45 @@ public class ItemActivity extends AppCompatActivity {
             capTV.setText(String.valueOf(parking.getTotal_capacity()));
             ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter(parking.getImageURLs());
 
-        }catch (NullPointerException e){}
+            slider.setAdapter(itemSliderAdapter);
+            slider.setSelectedSlide(itemSliderAdapter.getItemCount() - 1, false);
+
+            initMap(parking.getAddress_latitude(), parking.getAddress_longitude());
+
+        } catch (NullPointerException ignored) {
+        }
 
 
-
-
-        //todo get parking info
-
-        ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter();
-
-        slider.setAdapter(itemSliderAdapter);
-        slider.setSelectedSlide(itemSliderAdapter.getItemCount() - 1, false);
     }
 
+    private void initMap(float lat, float lang) {
+        VectorElementLayer userMarkerLayer = NeshanServices.createVectorElementLayer();
 
-    private void putPinOnMap(int lat, int lang) {
+        map.setZoom(14f, 0.5f);
+        map.getLayers().add(NeshanServices.createBaseMap(NeshanMapStyle.STANDARD_DAY));
+
+        map.getLayers().add(userMarkerLayer);
+
+        LngLat focalPoint = new LngLat(lang, lat);
+        map.setFocalPointPosition(focalPoint, 0f);
+
+        AnimationStyleBuilder animStBl = new AnimationStyleBuilder();
+        animStBl.setFadeAnimationType(AnimationType.ANIMATION_TYPE_SMOOTHSTEP);
+        animStBl.setSizeAnimationType(AnimationType.ANIMATION_TYPE_SPRING);
+        animStBl.setPhaseInDuration(0.5f);
+        animStBl.setPhaseOutDuration(0.5f);
+        AnimationStyle animSt = animStBl.buildStyle();
+
+        MarkerStyleCreator markStCr = new MarkerStyleCreator();
+        markStCr.setSize(45f);
+        markStCr.setBitmap(BitmapUtils.createBitmapFromAndroidBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo)));
+
+        markStCr.setAnimationStyle(animSt);
+        MarkerStyle markSt = markStCr.buildStyle();
+        Marker temp = new Marker(focalPoint, markSt);
+        userMarkerLayer.add(temp);
+
+
     }
-
-
 
 }

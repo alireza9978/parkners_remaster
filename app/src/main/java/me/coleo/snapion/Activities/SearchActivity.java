@@ -62,10 +62,6 @@ public class SearchActivity extends AppCompatActivity {
         initViews();
         initScroller();
 
-
-
-
-
         parkingListAdapter = new ParkingListAdapter(parkingArrayList, getApplicationContext());
         recyclerView.setAdapter(parkingListAdapter);
 
@@ -73,7 +69,7 @@ public class SearchActivity extends AppCompatActivity {
             ServerClass.aroundParking(this, lat, lng, mode, null, parkingArrayList, page);
             searchBar.setText("اطراف شما");
             searchBar.setActivated(false);
-            //todo make it text view
+            searchBar.setEnabled(false);
         } else {
             hideNotFound();
             searchBar.setHint("تایپ کنید...");
@@ -81,7 +77,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-
+                    textToSearch = s.toString();
                 }
 
                 @Override
@@ -92,10 +88,8 @@ public class SearchActivity extends AppCompatActivity {
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                 }
             });
-            findButton.setOnClickListener(v -> {
-                ServerClass.aroundParking(this, lat, lng, mode, textToSearch, parkingArrayList, page);
-                //todo search here
-            });
+            findButton.setOnClickListener(v -> ServerClass.aroundParking(this, lat, lng,
+                    mode, textToSearch, parkingArrayList, page));
         }
 
 
@@ -105,17 +99,14 @@ public class SearchActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-
-
         EndlessRecyclerViewScrollListener listener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 Log.i("Search_page", "onLoadMore: page " + page + " , totalItemCount " + totalItemsCount);
                 //todo request next page
-                ServerClass.aroundParking(SearchActivity.this , lat, lng, mode, textToSearch, parkingArrayList, page);
+                ServerClass.aroundParking(SearchActivity.this, lat, lng, mode, textToSearch, parkingArrayList, page);
             }
         };
-
 
         recyclerView.addOnScrollListener(listener);
 
@@ -136,7 +127,7 @@ public class SearchActivity extends AppCompatActivity {
             hideNotFound();
 //            parkingListAdapter = new ParkingListAdapter(parkingArrayList, getApplicationContext());
 //            recyclerView.setAdapter(parkingListAdapter);
-            recyclerView.getAdapter().notifyDataSetChanged();
+            parkingListAdapter.notifyDataSetChanged();
             System.gc();
         }
     }

@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
@@ -36,6 +39,7 @@ public class Constants {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 10810;
 
     private static String BASE_URL = "http://dev2.parkners.com/api/av1/";
+    public static String BASE_MEDIA_URL = "http://dev2.parkners.com";
     public static String CREATE_USER_URL = BASE_URL + "users/create";
     public static String ENTER_USER_URL = BASE_URL + "users/enter";
     public static String AROUND_PARKING_URL = BASE_URL + "parkings/manager";
@@ -135,6 +139,22 @@ public class Constants {
                 Toast.makeText(context, "از بخش تنظیمات ، دسترسی برنامه به موقعیت مکانی را فراهم سازید.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    /**
+     * تبدیل بردار به عکس
+     */
+    public static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+
+        assert drawable != null;
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
 
 }
