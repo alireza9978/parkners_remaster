@@ -201,10 +201,10 @@ public class ServerClass {
 
     }
 
-    public void sendComment(Context context, String comment) {
+    public static void sendComment(Context context, String comment) {
 
 
-        String url = Constants.TEXT_PARKING_URL;
+        String url = Constants.COMMENT_URL;
 
         Log.i(TAG, "around parking");
         JSONObject temp = new JSONObject();

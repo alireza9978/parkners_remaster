@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import me.coleo.snapion.R;
 import me.coleo.snapion.constants.Constants;
+import me.coleo.snapion.server.ServerClass;
 
 public class SupportActivity extends AppCompatActivity {
 
@@ -33,17 +34,13 @@ public class SupportActivity extends AppCompatActivity {
             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + Constants.SUPPORT_PHONE_NUMBER));
             startActivity(intent);
         });
-        sendCommentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        sendCommentBtn.setOnClickListener(view -> uploadComment());
     }
 
     private void uploadComment(){
 
         String text = commentET.getText().toString();
+        ServerClass.sendComment(this,text);
 
     }
 
