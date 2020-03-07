@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Debug;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -17,11 +18,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 
 import me.coleo.snapion.Activities.SearchActivity;
 import me.coleo.snapion.Activities.SplashActivity;
 import me.coleo.snapion.constants.Constants;
+import me.coleo.snapion.models.Comment;
 import me.coleo.snapion.models.Parking;
 import me.coleo.snapion.models.User;
 
@@ -209,12 +212,10 @@ public class ServerClass {
         Log.i(TAG, "around parking");
         JSONObject temp = new JSONObject();
         try {
-            temp.put("text", comment);
-            temp.put("token", Constants.getToken(context));
-        } catch (Exception e) {
+            temp.put("comment" , comment);
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.POST, url, temp, response -> {
                     saveToken(context, response);
