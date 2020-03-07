@@ -3,6 +3,7 @@ package me.coleo.snapion.adapter;
 import java.util.ArrayList;
 
 import me.coleo.snapion.R;
+import me.coleo.snapion.constants.Constants;
 import ss.com.bannerslider.adapters.SliderAdapter;
 import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
 
@@ -19,7 +20,7 @@ public class ItemSliderAdapter extends SliderAdapter {
     public ItemSliderAdapter() {
     }
 
-    public void setItemCt(int itemCt){
+    public void setItemCt(int itemCt) {
         this.itemCt = itemCt;
     }
 
@@ -30,6 +31,11 @@ public class ItemSliderAdapter extends SliderAdapter {
 
     @Override
     public void onBindImageSlide(int position, ImageSlideViewHolder imageSlideViewHolder) {
-        imageSlideViewHolder.bindImageSlide(imageURLs.get(position));
+        if (imageURLs.size() > 0)
+            imageSlideViewHolder.bindImageSlide(imageURLs.get(position));
+        else {
+            itemCt = 1;
+            imageSlideViewHolder.bindImageSlide(Constants.SAMPLE_PIC_URL);
+        }
     }
 }

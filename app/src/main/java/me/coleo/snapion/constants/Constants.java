@@ -45,6 +45,7 @@ public class Constants {
     public static String AROUND_PARKING_URL = BASE_URL + "parkings/manager";
     public static String TEXT_PARKING_URL = BASE_URL + "parkings/around_point";//todo edit url
     public static String COMMENT_URL = BASE_URL + "parkings/around_point";//todo edit url
+    public static String SAMPLE_PIC_URL = BASE_URL + "parkings/around_point";//todo edit url
 
     /**
      * گرفتن کلید ارتباط با سرور

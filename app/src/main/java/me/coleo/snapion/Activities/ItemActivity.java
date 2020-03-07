@@ -63,7 +63,9 @@ public class ItemActivity extends AppCompatActivity {
             feeTV.setText(parking.getPricesString());
             timesTV.setText(parking.getWorkHoursString());
             capTV.setText(String.valueOf(parking.getTotal_capacity()));
-            ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter(parking.getImageURLs());
+
+//            ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter(parking.getImageURLs());
+            ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter();
 
             slider.setAdapter(itemSliderAdapter);
             slider.setSelectedSlide(itemSliderAdapter.getItemCount() - 1, false);
