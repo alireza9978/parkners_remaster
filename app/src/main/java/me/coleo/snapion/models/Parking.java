@@ -11,6 +11,8 @@ public class Parking implements Serializable {
     private float total_capacity;
     private float address_latitude;
     private float address_longitude;
+    private int filled_capacity = 0;
+    private int capacity_bar;
     private String distance;
     private ArrayList<Details> payment_texts;
     private ArrayList<Details> working_detail_texts;
@@ -29,7 +31,33 @@ public class Parking implements Serializable {
                 '}';
     }
 
+    public float getProgress() {
+        if (capacity_bar == 0) {
+            return 0;
+        }
+        return (capacity_bar * 20f) - 1;
+    }
+
+    public int getCapacity_bar() {
+        return capacity_bar;
+    }
+
+    public void setCapacity_bar(int capacity_bar) {
+        this.capacity_bar = capacity_bar;
+    }
+
+    public int getFilled_capacity() {
+        return filled_capacity;
+    }
+
+    public void setFilled_capacity(int filled_capacity) {
+        this.filled_capacity = filled_capacity;
+    }
+
     public String getDistance() {
+        if (distance == null) {
+            return "ناموجود";
+        }
         return distance;
     }
 
@@ -110,7 +138,7 @@ public class Parking implements Serializable {
     }
 
 
-    public String getPricesString(){
+    public String getPricesString() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < payment_texts.size(); i++) {
             result.append(payment_texts.get(i).getText());
@@ -120,7 +148,7 @@ public class Parking implements Serializable {
     }
 
 
-    public String getWorkHoursString(){
+    public String getWorkHoursString() {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < working_detail_texts.size(); i++) {
             result.append(working_detail_texts.get(i).getText());
@@ -130,7 +158,7 @@ public class Parking implements Serializable {
     }
 
 
-    public ArrayList<String> getImageURLs(){
+    public ArrayList<String> getImageURLs() {
         ArrayList<String> result = new ArrayList<>();
         for (int i = 0; i < images.size(); i++) {
             result.add(images.get(i).getImage().getFile());

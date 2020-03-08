@@ -34,6 +34,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="5dp"
+        android:layout_marginLeft="5dp"
         app:layout_constraintBottom_toTopOf="@id/progress_bar"
         app:layout_constraintLeft_toRightOf="@id/route_button"
         app:layout_constraintRight_toRightOf="parent"
@@ -76,6 +77,7 @@
         app:layout_constraintLeft_toLeftOf="@id/textContainer"
         app:layout_constraintRight_toRightOf="@id/textContainer"
         app:layout_constraintTop_toBottomOf="@id/textContainer"
+        android:layout_margin="5dp"
         app:square_count="5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

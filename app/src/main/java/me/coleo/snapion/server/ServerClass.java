@@ -160,7 +160,7 @@ public class ServerClass {
 
         String url = Constants.AROUND_PARKING_URL;
 
-        Log.i(TAG, "around parking");
+//        Log.i(TAG, "around parking");
         JSONObject temp = new JSONObject();
         try {
             temp.put("latitude", lat);
@@ -183,11 +183,7 @@ public class ServerClass {
                                 Gson gson = new Gson();
                                 for (int i = 0; i < parkingArray.length(); i++) {
                                     JSONObject parking = parkingArray.getJSONObject(i);
-                                    Log.i(TAG, "aroundParking: " + parking.toString());
                                     parkings.add(gson.fromJson(parking.toString(), Parking.class));
-                                }
-                                for (Parking parking : parkings) {
-                                    Log.i(TAG, "aroundParking: " + parking.toString());
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

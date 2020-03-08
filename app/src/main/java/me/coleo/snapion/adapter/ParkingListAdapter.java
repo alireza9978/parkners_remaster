@@ -42,8 +42,7 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
     public void onBindViewHolder(@NonNull ParkingViewHolder holder, int position) {
         Parking parking = parkingArrayList.get(position);
         holder.parkingName.setText(parking.getTitle());
-//        holder.progressBar.init(parking.getTotal_capacity());
-        //todo pay some attention
+        holder.progressBar.init(parking.getProgress());
         holder.parkingAddress.setText(parking.getAddress_text());
         holder.distance.setText(parking.getDistance() + "M");
         holder.route.setOnClickListener(v -> {

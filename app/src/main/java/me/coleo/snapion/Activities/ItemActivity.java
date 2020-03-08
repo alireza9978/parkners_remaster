@@ -1,14 +1,22 @@
 package me.coleo.snapion.Activities;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import org.neshan.core.LngLat;
 import org.neshan.layers.VectorElementLayer;
@@ -98,6 +106,27 @@ public class ItemActivity extends AppCompatActivity {
 
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private static Bitmap getBitmap(VectorDrawable vectorDrawable) {
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
+                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        vectorDrawable.draw(canvas);
+        return bitmap;
+    }
+
+    private static Bitmap getBitmap(Context context, int drawableId) {
+        Drawable drawable = ContextCompat.getDrawable(context, drawableId);
+        if (drawable instanceof BitmapDrawable) {
+            return BitmapFactory.decodeResource(context.getResources(), drawableId);
+        } else if (drawable instanceof VectorDrawable) {
+            return getBitmap((VectorDrawable) drawable);
+        } else {
+            throw new IllegalArgumentException("unsupported drawable type");
+        }
+    }
+
     private void initMap(float lat, float lang) {
         VectorElementLayer userMarkerLayer = NeshanServices.createVectorElementLayer();
 
@@ -117,12 +146,16 @@ public class ItemActivity extends AppCompatActivity {
         AnimationStyle animSt = animStBl.buildStyle();
 
         MarkerStyleCreator markStCr = new MarkerStyleCreator();
-        markStCr.setSize(45f);
-        markStCr.setBitmap(BitmapUtils.createBitmapFromAndroidBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.logo)));
+        markStCr.setSize(20f);
 
+        Bitmap bitmap = getBitmap(getApplicationContext(), R.drawable.ic_marker_red_optimized);
+
+        markStCr.setBitmap(BitmapUtils.createBitmapFromAndroidBitmap(bitmap));
         markStCr.setAnimationStyle(animSt);
+
         MarkerStyle markSt = markStCr.buildStyle();
         Marker temp = new Marker(focalPoint, markSt);
+
         userMarkerLayer.add(temp);
 
 

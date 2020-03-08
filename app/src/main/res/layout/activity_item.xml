@@ -151,7 +151,7 @@
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/itemPicsIV"
+                        app:layout_constraintRight_toLeftOf="@+id/itemPicsIV"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/itemPicsIV"
                         app:slider_loopSlides="true" />
@@ -159,53 +159,47 @@
 
                     <TextView
                         android:id="@+id/itemTitleTV"
-                        style="@style/AppTheme.TextView"
+                        style="@style/AppTheme.TextView.itemPage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
                         android:layout_marginRight="16dp"
-                        android:text="TextView"
+                        android:text="test"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/itemAddrTV"
-                        style="@style/AppTheme.TextView"
-                        android:layout_width="wrap_content"
+                        style="@style/AppTheme.TextView.itemPage"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="TextView"
-                        app:layout_constraintEnd_toStartOf="@+id/itemAddrIV"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/itemAddrIV"
                         app:layout_constraintTop_toTopOf="@+id/itemAddrIV" />
 
                     <TextView
                         android:id="@+id/itemCapacityTV"
-                        style="@style/AppTheme.TextView"
-                        android:layout_width="wrap_content"
+                        style="@style/AppTheme.TextView.itemPage"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="TextView"
-                        app:layout_constraintEnd_toStartOf="@+id/itemFeeIV"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/itemFeeIV"
                         app:layout_constraintTop_toTopOf="@+id/itemFeeIV" />
 
                     <TextView
                         android:id="@+id/itemFeeTV"
-                        style="@style/AppTheme.TextView"
-                        android:layout_width="wrap_content"
+                        style="@style/AppTheme.TextView.itemPage"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="TextView"
-                        app:layout_constraintEnd_toStartOf="@+id/itemCapacityIV"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/itemCapacityIV"
                         app:layout_constraintTop_toTopOf="@+id/itemCapacityIV" />
 
                     <TextView
                         android:id="@+id/itemTimesTV"
-                        style="@style/AppTheme.TextView"
-                        android:layout_width="wrap_content"
+                        style="@style/AppTheme.TextView.itemPage"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:text="TextView"
-                        app:layout_constraintEnd_toStartOf="@+id/itemTimesIV"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/itemTimesIV"
                         app:layout_constraintTop_toTopOf="@+id/itemTimesIV" />
 
                     <ImageView

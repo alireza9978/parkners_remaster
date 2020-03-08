@@ -27,6 +27,7 @@ public class SearchActivity extends AppCompatActivity {
     private TextView notFoundText;
     private EditText searchBar;
     private Button findButton;
+    private Button backButton;
 
     private ParkingListAdapter parkingListAdapter;
     private ArrayList<Parking> parkingArrayList = new ArrayList<>();
@@ -37,6 +38,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private String textToSearch;
     private SearchActivity activity = this;
+    private SearchActivity context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +73,14 @@ public class SearchActivity extends AppCompatActivity {
         } else {
             hideNotFound();
             searchBar.setHint("تایپ کنید...");
-            findButton.setOnClickListener(v -> ServerClass.aroundParking(this, lat, lng,
-                    mode, textToSearch, parkingArrayList, page));
+            findButton.setOnClickListener(v -> {
+                activity.page = 1;
+                parkingArrayList.clear();
+                parkingListAdapter.notifyDataSetChanged();
+                textToSearch = searchBar.getText().toString();
+                ServerClass.aroundParking(this, lat, lng,
+                        mode, textToSearch, parkingArrayList, page);
+            });
         }
 
 
@@ -92,6 +100,8 @@ public class SearchActivity extends AppCompatActivity {
 
         recyclerView.addOnScrollListener(listener);
 
+        backButton.setOnClickListener(v -> context.finish());
+
     }
 
     private void initViews() {
@@ -100,6 +110,7 @@ public class SearchActivity extends AppCompatActivity {
         notFoundText = findViewById(R.id.not_found_text_id);
         searchBar = findViewById(R.id.search_box_edit_text);
         findButton = findViewById(R.id.search_button);
+        backButton = findViewById(R.id.back_arrow);
     }
 
     public void loadParkingFromServer() {
@@ -107,10 +118,7 @@ public class SearchActivity extends AppCompatActivity {
             showNotFound();
         } else {
             hideNotFound();
-//            parkingListAdapter = new ParkingListAdapter(parkingArrayList, getApplicationContext());
-//            recyclerView.setAdapter(parkingListAdapter);
             parkingListAdapter.notifyDataSetChanged();
-            System.gc();
         }
     }
 
