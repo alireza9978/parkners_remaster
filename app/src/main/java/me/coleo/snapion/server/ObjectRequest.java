@@ -31,7 +31,6 @@ public class ObjectRequest extends JsonObjectRequest {
         HashMap<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
         headers.put("Authorization", "token " + Constants.getToken(context));
-        headers.put("role", "user");
         return headers;
     }
 

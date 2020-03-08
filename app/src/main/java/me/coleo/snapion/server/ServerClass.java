@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Debug;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -18,13 +17,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 
 import me.coleo.snapion.Activities.SearchActivity;
 import me.coleo.snapion.Activities.SplashActivity;
+import me.coleo.snapion.Activities.SupportActivity;
 import me.coleo.snapion.constants.Constants;
-import me.coleo.snapion.models.Comment;
 import me.coleo.snapion.models.Parking;
 import me.coleo.snapion.models.User;
 
@@ -206,21 +204,26 @@ public class ServerClass {
 
     public static void sendComment(Context context, String comment) {
 
-
         String url = Constants.COMMENT_URL;
 
         Log.i(TAG, "around parking");
         JSONObject temp = new JSONObject();
         try {
-            temp.put("comment" , comment);
+            JSONObject com = new JSONObject();
+            com.put("text", comment);
+            temp.put("comment", com);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url, temp, response -> {
-                    saveToken(context, response);
-                }, error -> ServerClass.printError("commentSend", error));
 
+        ObjectRequest jsonObjectRequest = new ObjectRequest
+                (context, Request.Method.POST, url, temp,
+                        response -> {
+                            saveToken(context, response);
+                            ((SupportActivity) context).sent();
+                        }
+                        , error ->
+                        ServerClass.printError("commentSend", error));
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
