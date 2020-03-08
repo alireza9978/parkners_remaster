@@ -25,7 +25,6 @@ public class SplashActivity extends AppCompatActivity {
                 ServerClass.createUser(this);
             else
                 ServerClass.enterUser(this);
-
         }
     }
 
