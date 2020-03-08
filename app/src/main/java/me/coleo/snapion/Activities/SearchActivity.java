@@ -1,6 +1,7 @@
 package me.coleo.snapion.Activities;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -109,6 +110,13 @@ public class SearchActivity extends AppCompatActivity {
         notFoundImage = findViewById(R.id.not_found_image_id);
         notFoundText = findViewById(R.id.not_found_text_id);
         searchBar = findViewById(R.id.search_box_edit_text);
+        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                findButton.performClick();
+                return false;
+            }
+        });
         findButton = findViewById(R.id.search_button);
         backButton = findViewById(R.id.back_arrow);
     }
