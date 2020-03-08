@@ -1,7 +1,11 @@
 package me.coleo.snapion.Activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +35,7 @@ public class ItemActivity extends AppCompatActivity {
     TextView addresTV, feeTV, capTV, timesTV, titleTV;
     Slider slider;
     MapView map;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,10 @@ public class ItemActivity extends AppCompatActivity {
         titleTV = findViewById(R.id.itemTitleTV);
         timesTV = findViewById(R.id.itemTimesTV);
         capTV = findViewById(R.id.itemCapacityTV);
+        ImageButton share = findViewById(R.id.shareButton);
+        ImageButton route = findViewById(R.id.route_button);
+        ImageButton back = findViewById(R.id.back_arrow);
+        back.setOnClickListener(v -> finish());
 
         Bundle extra = getIntent().getExtras();
         assert extra != null;
@@ -57,18 +66,29 @@ public class ItemActivity extends AppCompatActivity {
             parking = (Parking) extra.getSerializable(Constants.PARKING_ID);
             assert parking != null;
 
-
             titleTV.setText(parking.getTitle());
             addresTV.setText(parking.getAddress_text());
             feeTV.setText(parking.getPricesString());
             timesTV.setText(parking.getWorkHoursString());
             capTV.setText(String.valueOf(parking.getTotal_capacity()));
 
-//            ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter(parking.getImageURLs());
-            ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter();
+            ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter(parking.getImageURLs());
 
             slider.setAdapter(itemSliderAdapter);
             slider.setSelectedSlide(itemSliderAdapter.getItemCount() - 1, false);
+
+            route.setOnClickListener(v -> {
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + parking.getAddress_latitude() + "," + parking.getAddress_longitude() + "&mode=d");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                context.startActivity(mapIntent);
+            });
+            share.setOnClickListener(v -> {
+                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, "share some info");
+                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+            });
 
             initMap(parking.getAddress_latitude(), parking.getAddress_longitude());
 

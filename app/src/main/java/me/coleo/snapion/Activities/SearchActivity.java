@@ -1,9 +1,6 @@
 package me.coleo.snapion.Activities;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +36,7 @@ public class SearchActivity extends AppCompatActivity {
     private int page = 1;
 
     private String textToSearch;
+    private SearchActivity activity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,21 +71,6 @@ public class SearchActivity extends AppCompatActivity {
         } else {
             hideNotFound();
             searchBar.setHint("تایپ کنید...");
-            searchBar.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    textToSearch = s.toString();
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                }
-            });
             findButton.setOnClickListener(v -> ServerClass.aroundParking(this, lat, lng,
                     mode, textToSearch, parkingArrayList, page));
         }
@@ -102,9 +85,8 @@ public class SearchActivity extends AppCompatActivity {
         EndlessRecyclerViewScrollListener listener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                Log.i("Search_page", "onLoadMore: page " + page + " , totalItemCount " + totalItemsCount);
-                //todo request next page
-                ServerClass.aroundParking(SearchActivity.this, lat, lng, mode, textToSearch, parkingArrayList, page);
+                activity.page++;
+                ServerClass.aroundParking(SearchActivity.this, lat, lng, mode, textToSearch, parkingArrayList, activity.page);
             }
         };
 
