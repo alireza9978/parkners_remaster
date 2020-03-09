@@ -148,13 +148,13 @@
                         android:id="@+id/itemSlider"
                         android:layout_width="0dp"
                         android:layout_height="150dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toLeftOf="@+id/itemPicsIV"
+                        app:layout_constraintEnd_toEndOf="@id/itemTimesTV"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/itemPicsIV"
-                        app:slider_loopSlides="true" />
+                        app:slider_loopSlides="false" />
 
 
                     <TextView
@@ -249,7 +249,7 @@
                         android:layout_height="27dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/itemTimesTV"
                         app:srcCompat="@drawable/ic_camera_1" />
                 </androidx.constraintlayout.widget.ConstraintLayout>

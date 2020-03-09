@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,6 +85,7 @@ public class ItemActivity extends AppCompatActivity {
 
             slider.setAdapter(itemSliderAdapter);
             slider.setSelectedSlide(itemSliderAdapter.getItemCount() - 1, false);
+
 
             route.setOnClickListener(v -> {
                 Uri gmmIntentUri = Uri.parse("google.navigation:q=" + parking.getAddress_latitude() + "," + parking.getAddress_longitude() + "&mode=d");

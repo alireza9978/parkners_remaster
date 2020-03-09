@@ -1,5 +1,9 @@
 package me.coleo.snapion.adapter;
 
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
 import java.util.ArrayList;
 
 import me.coleo.snapion.R;
@@ -32,10 +36,14 @@ public class ItemSliderAdapter extends SliderAdapter {
     @Override
     public void onBindImageSlide(int position, ImageSlideViewHolder imageSlideViewHolder) {
         if (imageURLs.size() > 0)
-            imageSlideViewHolder.bindImageSlide(imageURLs.get(position));
+            imageSlideViewHolder.bindImageSlide(imageURLs.get((position) ));
         else {
             itemCt = 1;
             imageSlideViewHolder.bindImageSlide(Constants.SAMPLE_PIC_URL);
         }
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(20,0,0,0);
+        imageSlideViewHolder.imageView.setLayoutParams(params);
+        imageSlideViewHolder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
 }
