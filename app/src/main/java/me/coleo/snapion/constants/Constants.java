@@ -21,7 +21,7 @@ import me.coleo.snapion.Activities.MainActivity;
 
 public class Constants {
 
-    public static String SUPPORT_PHONE_NUMBER = "+989126653006";
+    public static String SUPPORT_PHONE_NUMBER = "0912 665 3006";
 
     public static String NO_TOKEN = "where is token";
     private static String TOKEN_STORAGE = "someWhereInDarkness";
