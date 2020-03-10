@@ -179,7 +179,7 @@
                         app:layout_constraintTop_toTopOf="@+id/itemAddrIV" />
 
                     <TextView
-                        android:id="@+id/itemCapacityTV"
+                        android:id="@+id/itemFeeTV"
                         style="@style/AppTheme.TextView.itemPage"
                         android:layout_height="wrap_content"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -187,7 +187,7 @@
                         app:layout_constraintTop_toTopOf="@+id/itemFeeIV" />
 
                     <TextView
-                        android:id="@+id/itemFeeTV"
+                        android:id="@+id/itemCapacityTV"
                         style="@style/AppTheme.TextView.itemPage"
                         android:layout_height="wrap_content"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -230,7 +230,7 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginRight="16dp"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/itemFeeTV"
+                        app:layout_constraintTop_toBottomOf="@+id/itemCapacityTV"
                         app:srcCompat="@drawable/ic_fee_1" />
 
                     <ImageView
@@ -240,7 +240,7 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginRight="16dp"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/itemCapacityTV"
+                        app:layout_constraintTop_toBottomOf="@+id/itemFeeTV"
                         app:srcCompat="@drawable/ic_car_time" />
 
                     <ImageView
