@@ -30,14 +30,6 @@ public class ServerClass {
 
     private static String TAG = "Server_class";
 
-    private static void printError(String from, VolleyError error) {
-        if (error != null) {
-            Log.i(TAG, "printError: " + from + " message :" + error.getMessage() + " code :" + error.networkResponse.statusCode);
-        } else {
-            Log.i(TAG, "printError: " + from + " null ");
-        }
-    }
-
     private static String getErrorMessage(VolleyError error) {
         String temp = new String(error.networkResponse.data);
         try {
@@ -105,7 +97,6 @@ public class ServerClass {
     public static void createUser(final Context context) {
 
         String url = Constants.CREATE_USER_URL;
-        Log.i(TAG, "createUser: start");
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, response -> {
                     try {
@@ -117,7 +108,7 @@ public class ServerClass {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }, error -> ServerClass.printError("createUser", error));
+                }, error -> ServerClass.handleError(context, error));
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
@@ -144,7 +135,7 @@ public class ServerClass {
                 (Request.Method.POST, url, temp, response -> {
                     saveToken(context, response);
                     ((SplashActivity) context).goToMain();
-                }, error -> ServerClass.printError("enterUser", error));
+                }, error -> ServerClass.handleError(context, error));
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
@@ -159,8 +150,6 @@ public class ServerClass {
                                      ArrayList<Parking> parkings, int page) {
 
         String url = Constants.AROUND_PARKING_URL;
-
-//        Log.i(TAG, "around parking");
         JSONObject temp = new JSONObject();
         try {
             temp.put("latitude", lat);
@@ -190,8 +179,7 @@ public class ServerClass {
                             }
                             ((SearchActivity) context).loadParkingFromServer();
                         }
-                        , error ->
-                        ServerClass.printError("aroundParking", error));
+                        , error -> ServerClass.handleError(context, error));
 
 
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
@@ -218,8 +206,7 @@ public class ServerClass {
                             saveToken(context, response);
                             ((SupportActivity) context).sent();
                         }
-                        , error ->
-                        ServerClass.printError("commentSend", error));
+                        , error -> ServerClass.handleError(context, error));
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
