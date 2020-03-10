@@ -78,6 +78,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 splashTV.setVisibility(View.VISIBLE);
+                splashLoading.setVisibility(View.VISIBLE);
                 t.schedule(task,1000);
             }
 
@@ -125,7 +126,6 @@ public class SplashActivity extends AppCompatActivity {
 
             splashTV.startAnimation(anim);
 
-            splashLoading.setVisibility(View.VISIBLE);
         }
 
         @Override
