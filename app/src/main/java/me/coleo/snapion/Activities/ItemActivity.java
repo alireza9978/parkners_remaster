@@ -13,7 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +35,7 @@ import me.coleo.snapion.R;
 import me.coleo.snapion.adapter.ItemImageLoadingService;
 import me.coleo.snapion.adapter.ItemSliderAdapter;
 import me.coleo.snapion.constants.Constants;
+import me.coleo.snapion.constants.FormatHelper;
 import me.coleo.snapion.models.Parking;
 import ss.com.bannerslider.Slider;
 
@@ -79,7 +79,7 @@ public class ItemActivity extends AppCompatActivity {
             addresTV.setText(parking.getAddress_text());
             feeTV.setText(parking.getPricesString());
             timesTV.setText(parking.getWorkHoursString());
-            capTV.setText(String.valueOf(parking.getTotal_capacity()));
+            capTV.setText(FormatHelper.toPersianNumber(String.valueOf((int) parking.getTotal_capacity())));
 
             ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter(parking.getImageURLs());
 

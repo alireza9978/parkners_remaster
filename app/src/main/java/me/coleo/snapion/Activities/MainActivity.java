@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
 
         LngLat focalPoint = new LngLat(59.6168, 36.2605);
         map.setFocalPointPosition(focalPoint, 0f);
-        map.setZoom(14f, 0.5f);
+        map.setZoom(17f, 0.5f);
         map.getLayers().add(NeshanServices.createBaseMap(NeshanMapStyle.STANDARD_DAY));
 
         map.getOptions().setPanBounds(new Bounds(

@@ -67,10 +67,12 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setAdapter(parkingListAdapter);
 
         if (mode == Constants.SearchMode.location) {
+            hideNotFound();
             ServerClass.aroundParking(this, lat, lng, mode, null, parkingArrayList, page);
             searchBar.setText("اطراف شما");
-            searchBar.setActivated(false);
-            searchBar.setEnabled(false);
+            searchBar.setFocusable(false);
+            searchBar.setFocusableInTouchMode(false);
+            searchBar.setClickable(false);
         } else {
             hideNotFound();
             searchBar.setHint("تایپ کنید...");

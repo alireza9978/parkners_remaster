@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorMapConteinersBack"
         android:transitionName="@string/main_container_transition_name"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -60,6 +61,7 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/search_box_edit_text"
                 style="@style/AppTheme.EditText"
+                android:layout_marginRight="10dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:cursorVisible="true"

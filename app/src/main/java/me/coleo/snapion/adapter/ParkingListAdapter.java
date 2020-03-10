@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import me.coleo.snapion.Activities.ItemActivity;
 import me.coleo.snapion.R;
 import me.coleo.snapion.constants.Constants;
+import me.coleo.snapion.constants.FormatHelper;
 import me.coleo.snapion.models.Parking;
 import me.coleo.snapion.ui_element.SquaredProgressBar;
 
@@ -29,6 +30,7 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
     public ParkingListAdapter(ArrayList<Parking> parkingArrayList, Context context) {
         this.parkingArrayList = parkingArrayList;
         this.context = context;
+
     }
 
     @NonNull
@@ -44,7 +46,7 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
         holder.parkingName.setText(parking.getTitle());
         holder.progressBar.init(parking.getProgress());
         holder.parkingAddress.setText(parking.getAddress_text());
-        holder.distance.setText(parking.getDistance() + "M");
+        holder.distance.setText(FormatHelper.toPersianNumber(parking.getDistance() + " m"));
         holder.route.setOnClickListener(v -> {
             Uri gmmIntentUri = Uri.parse("google.navigation:q=" + parking.getAddress_latitude() + "," + parking.getAddress_longitude() + "&mode=d");
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);

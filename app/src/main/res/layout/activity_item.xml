@@ -11,10 +11,11 @@
         android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:paddingBottom="5dp"
         android:background="@android:color/white"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="parent"
@@ -107,7 +108,7 @@
                         android:background="@android:color/white"
                         android:divider="@android:color/transparent"
                         android:dividerHeight="0.0px"
-                        app:cardElevation="30dp"
+                        app:cardElevation="20dp"
                         app:cardPreventCornerOverlap="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
@@ -116,10 +117,12 @@
                             android:id="@+id/route_button"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
+                            android:layout_gravity="center"
                             android:background="@drawable/routing_item_back"
                             android:contentDescription="@string/find_route"
                             android:fadingEdgeLength="1dp"
-                            android:src="@drawable/ic_routing_icon" />
+                            android:foregroundGravity="center"
+                            android:src="@drawable/ic_routing_icon_small_map" />
                     </androidx.cardview.widget.CardView>
 
 
