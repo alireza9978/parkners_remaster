@@ -108,7 +108,12 @@ public class ServerClass {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }, error -> ServerClass.handleError(context, error));
+                }, error -> {
+                    if (error == null || error.networkResponse == null) {
+                        ((SplashActivity) context).showRetry();
+                    } else
+                        ServerClass.handleError(context, error);
+                });
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
@@ -135,7 +140,12 @@ public class ServerClass {
                 (Request.Method.POST, url, temp, response -> {
                     saveToken(context, response);
                     ((SplashActivity) context).goToMain();
-                }, error -> ServerClass.handleError(context, error));
+                }, error -> {
+                    if (error == null || error.networkResponse == null) {
+                        ((SplashActivity) context).showRetry();
+                    } else
+                        ServerClass.handleError(context, error);
+                });
 
         // Access the RequestQueue through your singleton class.
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
