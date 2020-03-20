@@ -1,5 +1,8 @@
 package me.coleo.snapion.models;
 
+/**
+ * کلاس کاربر
+ */
 public class User {
 
     private int id;

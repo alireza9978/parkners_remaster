@@ -39,12 +39,28 @@ import me.coleo.snapion.constants.FormatHelper;
 import me.coleo.snapion.models.Parking;
 import ss.com.bannerslider.Slider;
 
+/**
+ * صفحه‌ی مشخصات یک پارکینگ
+ */
 public class ItemActivity extends AppCompatActivity {
 
     TextView addresTV, feeTV, capTV, timesTV, titleTV;
     Slider slider;
     MapView map;
     Context context = this;
+
+    /**
+     * تبدیل VectorDrawabe به Bitmap
+     */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private static Bitmap getBitmap(VectorDrawable vectorDrawable) {
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
+                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        vectorDrawable.draw(canvas);
+        return bitmap;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,10 +110,20 @@ public class ItemActivity extends AppCompatActivity {
                 context.startActivity(mapIntent);
             });
             share.setOnClickListener(v -> {
-                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(Intent.EXTRA_TEXT, "share some info");
-                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+                Uri imageUri = Uri.parse("android.resource://" + getPackageName()
+                        + "/drawable/" + "red_pin.png");
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Hello");
+                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+                shareIntent.setType("image/png");
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivity(Intent.createChooser(shareIntent, "send"));
+
+//                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
+//                sharingIntent.setType("text/plain");
+//                sharingIntent.putExtra(Intent.EXTRA_TEXT, "share some info");
+//                startActivity(Intent.createChooser(sharingIntent, "Share via"));
             });
 
             initMap(parking.getAddress_latitude(), parking.getAddress_longitude());
@@ -106,16 +132,6 @@ public class ItemActivity extends AppCompatActivity {
         }
 
 
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private static Bitmap getBitmap(VectorDrawable vectorDrawable) {
-        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
-                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        vectorDrawable.draw(canvas);
-        return bitmap;
     }
 
     private static Bitmap getBitmap(Context context, int drawableId) {
@@ -129,6 +145,9 @@ public class ItemActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * مقدار دهی اولیه نقشه
+     */
     private void initMap(float lat, float lang) {
         VectorElementLayer userMarkerLayer = NeshanServices.createVectorElementLayer();
 

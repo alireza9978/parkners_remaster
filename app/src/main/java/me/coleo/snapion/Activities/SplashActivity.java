@@ -22,6 +22,9 @@ import me.coleo.snapion.R;
 import me.coleo.snapion.constants.Constants;
 import me.coleo.snapion.server.ServerClass;
 
+/**
+ * صفحه‌ی اول برنامه
+ */
 public class SplashActivity extends AppCompatActivity {
 
     ImageView logo;
@@ -80,12 +83,55 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * تغییر صفحه به صفحه نقشه
+     */
     public void goToMain() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
     }
 
+    /**
+     * نشان دادن دکه تلاش مجدد
+     */
+    public void showRetry() {
+        runOnUiThread(() -> {
+            splashLoading.setVisibility(View.INVISIBLE);
+            retry.setVisibility(View.VISIBLE);
+        });
+    }
+
+    /**
+     * مخفی کردن دکمه تلاش مجدد
+     */
+    public void hideRetry() {
+        runOnUiThread(() -> {
+            splashLoading.setVisibility(View.VISIBLE);
+            retry.setVisibility(View.INVISIBLE);
+        });
+
+    }
+
+    /**
+     * بررسی و انجام عملیات رفتن به صفحه اصلی
+     */
+    private void nextPage() {
+        if (!ServerClass.isNetworkConnected(getApplicationContext())) {
+            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "اتصال اینترنت خود را بررسی کنید", Toast.LENGTH_LONG).show());
+            showRetry();
+        } else {
+            hideRetry();
+            if (Constants.getKey(getApplicationContext()).equals(Constants.NO_KEY))
+                ServerClass.createUser(SplashActivity.this);
+            else
+                ServerClass.enterUser(SplashActivity.this);
+        }
+    }
+
+    /**
+     * انیمیشن
+     */
     public class MyAnimationListener implements Animation.AnimationListener {
 
 
@@ -109,34 +155,6 @@ public class SplashActivity extends AppCompatActivity {
         @Override
         public void onAnimationRepeat(Animation animation) {
 
-        }
-    }
-
-    public void showRetry() {
-        runOnUiThread(() -> {
-            splashLoading.setVisibility(View.INVISIBLE);
-            retry.setVisibility(View.VISIBLE);
-        });
-    }
-
-    public void hideRetry() {
-        runOnUiThread(() -> {
-            splashLoading.setVisibility(View.VISIBLE);
-            retry.setVisibility(View.INVISIBLE);
-        });
-
-    }
-
-    private void nextPage() {
-        if (!ServerClass.isNetworkConnected(getApplicationContext())) {
-            runOnUiThread(() -> Toast.makeText(getApplicationContext(), "اتصال اینترنت خود را بررسی کنید", Toast.LENGTH_LONG).show());
-            showRetry();
-        } else {
-            hideRetry();
-            if (Constants.getKey(getApplicationContext()).equals(Constants.NO_KEY))
-                ServerClass.createUser(SplashActivity.this);
-            else
-                ServerClass.enterUser(SplashActivity.this);
         }
     }
 

@@ -2,6 +2,9 @@ package me.coleo.snapion.models;
 
 import java.io.Serializable;
 
+/**
+ * کلاس جزیات
+ */
 public class Details implements Serializable {
 
     private int id;

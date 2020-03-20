@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 
 import me.coleo.snapion.R;
 
+/**
+ * کتابخانه برای نمایش پر بودن پارکینگ
+ */
 public class SquaredProgressBar extends View {
 
     private int[] colors = new int[6];

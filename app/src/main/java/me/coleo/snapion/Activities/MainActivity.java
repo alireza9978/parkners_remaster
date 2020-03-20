@@ -43,6 +43,9 @@ import org.neshan.ui.MapView;
 import me.coleo.snapion.R;
 import me.coleo.snapion.constants.Constants;
 
+/**
+ * صفحه اصلی نقشه
+ */
 public class MainActivity extends AppCompatActivity {
 
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
@@ -68,13 +71,6 @@ public class MainActivity extends AppCompatActivity {
     private LocationRequest locationRequest;
     private LocationSettingsRequest locationSettingsRequest;
 
-    public boolean isPermissionToastShown() {
-        return permissionToastShown;
-    }
-
-    public void setPermissionToastShown(boolean permissionToastShown) {
-        this.permissionToastShown = permissionToastShown;
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -181,6 +177,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * مقدار دهی اولیه مکان کاربر
+     */
     private void initLocation() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         settingsClient = LocationServices.getSettingsClient(this);
@@ -234,6 +233,9 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * ساختن اولیه شی نقشه
+     */
     private void initMap() {
         VectorElementLayer userMarkerLayer = NeshanServices.createVectorElementLayer();
 
@@ -252,6 +254,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * مقدار دهی اولیه listners
+     */
     private void initListener() {
         pinButton.setOnClickListener(v -> {
             LngLat latLng = map.getFocalPointPosition();
@@ -266,6 +271,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * مقدار دهی اولیه شی های ui
+     */
     private void initViews() {
         map = findViewById(R.id.map);
         findLocation = findViewById(R.id.find_location);
@@ -276,6 +284,9 @@ public class MainActivity extends AppCompatActivity {
         logoButton = findViewById(R.id.parkners_icon);
     }
 
+    /**
+     * تغییر موقعیت نقشه به مکان کاربر
+     */
     public void focusOnUserLocation() {
         if (userLocation != null) {
             map.setFocalPointPosition(
@@ -284,6 +295,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * گرفتن اخرین مکان کاربر
+     */
     private void getLastLocation() {
         permissionGranted = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
         if (permissionGranted)
@@ -298,6 +312,9 @@ public class MainActivity extends AppCompatActivity {
         stopLocationUpdates();
     }
 
+    /**
+     * جلوگیری از بررسی تغیرات مکان کاربر
+     */
     public void stopLocationUpdates() {
         // Removing location updates
         fusedLocationClient
@@ -307,7 +324,9 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-
+    /**
+     * تغییر صفحه به جستوحو
+     */
     private void openSearchPage(double lat, double lng) {
         Intent intent = new Intent(MainActivity.this, SearchActivity.class);
         intent.putExtra(Constants.SEARCH_MODE, Constants.SearchMode.location);
@@ -317,6 +336,9 @@ public class MainActivity extends AppCompatActivity {
         startTransition(intent);
     }
 
+    /**
+     * تغییر صفحه به جستوحو
+     */
     private void openSearchPage() {
         Intent i = new Intent(MainActivity.this, SearchActivity.class);
         i.putExtra(Constants.SEARCH_MODE, Constants.SearchMode.search);
@@ -330,6 +352,9 @@ public class MainActivity extends AppCompatActivity {
         startTransition(i);
     }
 
+    /**
+     * افزودن انیمیشن تغیر صفحه
+     */
     private void startTransition(Intent intent) {
         String transitionNameEdit = getString(R.string.search_bar_transition_name);
         String transitionNameButton = getString(R.string.search_button_transition_name);
@@ -343,6 +368,14 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, p1, p2, p3, p4);
         startActivity(intent, transitionActivityOptions.toBundle());
+    }
+
+    public boolean isPermissionToastShown() {
+        return permissionToastShown;
+    }
+
+    public void setPermissionToastShown(boolean permissionToastShown) {
+        this.permissionToastShown = permissionToastShown;
     }
 
 }

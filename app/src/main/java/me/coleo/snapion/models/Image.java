@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import me.coleo.snapion.constants.Constants;
 
+/**
+ * کلاس عکس
+ */
 public class Image implements Serializable {
 
     private int id;

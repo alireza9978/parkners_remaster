@@ -6,11 +6,13 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-import me.coleo.snapion.R;
 import me.coleo.snapion.constants.Constants;
 import ss.com.bannerslider.adapters.SliderAdapter;
 import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
 
+/**
+ * کتابخانه برای نمایش عکس ها به صورت اسلاید
+ */
 public class ItemSliderAdapter extends SliderAdapter {
 
     private int itemCt = 5;

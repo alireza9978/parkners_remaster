@@ -1,5 +1,8 @@
 package me.coleo.snapion.models;
 
+/**
+ * کلاس پیغام
+ */
 public class Comment {
 
     private String text;

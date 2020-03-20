@@ -3,6 +3,9 @@ package me.coleo.snapion.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * کلاس پارکینگ
+ */
 public class Parking implements Serializable {
 
     private int id;

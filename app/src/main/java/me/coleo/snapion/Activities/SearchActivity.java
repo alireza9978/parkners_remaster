@@ -21,6 +21,9 @@ import me.coleo.snapion.constants.Constants;
 import me.coleo.snapion.models.Parking;
 import me.coleo.snapion.server.ServerClass;
 
+/**
+ * صفحه نمایش تمام پارکینگ ها و جستوجو
+ */
 public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -89,6 +92,9 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * مقدار دهی اولیه اسکرولر
+     */
     private void initScroller() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -107,6 +113,9 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * مقدار دهی اولیه شی های ui
+     */
     private void initViews() {
         recyclerView = findViewById(R.id.parking_list);
         notFoundImage = findViewById(R.id.not_found_image_id);
@@ -123,6 +132,9 @@ public class SearchActivity extends AppCompatActivity {
         backButton = findViewById(R.id.back_arrow);
     }
 
+    /**
+     * بارگزاری پارکینگ ها از سرور
+     */
     public void loadParkingFromServer() {
         if (parkingArrayList.isEmpty()) {
             showNotFound();
@@ -132,11 +144,17 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * نمایش پیدا نشدن پارکینگ
+     */
     private void showNotFound() {
         notFoundText.setVisibility(View.VISIBLE);
         notFoundImage.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * مخفی کردن پیدا نشدن پارکینگ
+     */
     private void hideNotFound() {
         notFoundText.setVisibility(View.INVISIBLE);
         notFoundImage.setVisibility(View.INVISIBLE);

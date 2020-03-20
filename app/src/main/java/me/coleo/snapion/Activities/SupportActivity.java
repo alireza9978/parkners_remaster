@@ -1,7 +1,6 @@
 package me.coleo.snapion.Activities;
 
 import android.content.Intent;
-import android.graphics.fonts.Font;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
@@ -17,6 +16,9 @@ import me.coleo.snapion.constants.Constants;
 import me.coleo.snapion.constants.FormatHelper;
 import me.coleo.snapion.server.ServerClass;
 
+/**
+ * صفحه‌ی پشتیبانی
+ */
 public class SupportActivity extends AppCompatActivity {
 
     TextView descTv, phoneTv, titleTV;
@@ -39,11 +41,17 @@ public class SupportActivity extends AppCompatActivity {
         sendCommentBtn.setOnClickListener(view -> uploadComment());
     }
 
+    /**
+     * ارسال نظر به سرور
+     */
     private void uploadComment() {
         String text = commentET.getText().toString();
         ServerClass.sendComment(this, text);
     }
 
+    /**
+     * نمایش تاییدیه ارسال و بستن صفحه
+     */
     public void sent() {
         Toast.makeText(this, "ارسال شد.", Toast.LENGTH_SHORT).show();
         finish();

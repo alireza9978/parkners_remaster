@@ -6,6 +6,9 @@ import com.squareup.picasso.Picasso;
 
 import ss.com.bannerslider.ImageLoadingService;
 
+/**
+ * کتابخانه برای بارگزاری عکس
+ */
 public class ItemImageLoadingService implements ImageLoadingService {
 
 

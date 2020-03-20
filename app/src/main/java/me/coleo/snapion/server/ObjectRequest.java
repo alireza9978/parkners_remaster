@@ -15,6 +15,9 @@ import java.util.Map;
 
 import me.coleo.snapion.constants.Constants;
 
+/**
+ * شی که برای سرور ارسال می شود
+ */
 public class ObjectRequest extends JsonObjectRequest {
 
     private final Context context;

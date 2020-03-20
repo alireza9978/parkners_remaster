@@ -19,6 +19,9 @@ import androidx.core.content.ContextCompat;
 
 import me.coleo.snapion.Activities.MainActivity;
 
+/**
+ * کلاس ثابت ها
+ */
 public class Constants {
 
     public static String SUPPORT_PHONE_NUMBER = "0912 665 3006";

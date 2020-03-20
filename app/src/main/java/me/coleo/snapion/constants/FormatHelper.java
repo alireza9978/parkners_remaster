@@ -1,5 +1,8 @@
 package me.coleo.snapion.constants;
 
+/**
+ * تبدیل اعداد فارسی
+ */
 public class FormatHelper {
 
     private static String[] persianNumbers = new String[]{"۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"};

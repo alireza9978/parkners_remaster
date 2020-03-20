@@ -26,10 +26,16 @@ import me.coleo.snapion.constants.Constants;
 import me.coleo.snapion.models.Parking;
 import me.coleo.snapion.models.User;
 
+/**
+ * کلاس ارتباط با سرور
+ */
 public class ServerClass {
 
     private static String TAG = "Server_class";
 
+    /**
+     * استخراج پیغام از error
+     */
     private static String getErrorMessage(VolleyError error) {
         String temp = new String(error.networkResponse.data);
         try {
@@ -44,6 +50,9 @@ public class ServerClass {
         return temp;
     }
 
+    /**
+     * یررسی و رفع خطا
+     */
     private static void handleError(Context context, VolleyError error) {
         error.printStackTrace();
         if (error.networkResponse == null) {
@@ -196,6 +205,9 @@ public class ServerClass {
 
     }
 
+    /**
+     * ارسال پیغام کاربر به سرور
+     */
     public static void sendComment(Context context, String comment) {
 
         String url = Constants.COMMENT_URL;

@@ -22,6 +22,9 @@ import me.coleo.snapion.constants.FormatHelper;
 import me.coleo.snapion.models.Parking;
 import me.coleo.snapion.ui_element.SquaredProgressBar;
 
+/**
+ * مدیریت لیست پارکینگ ها در هنگام نمایش
+ */
 public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.ParkingViewHolder> {
 
     private ArrayList<Parking> parkingArrayList;
