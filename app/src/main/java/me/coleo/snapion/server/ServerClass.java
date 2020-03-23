@@ -3,8 +3,11 @@ package me.coleo.snapion.server;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -136,11 +139,23 @@ public class ServerClass {
 
         String url = Constants.ENTER_USER_URL;
 
+        int versionCode = 0;
         String key = Constants.getKey(context);
         Log.i(TAG, "enterUser: key: " + key);
+        try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            versionCode = pInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
         JSONObject temp = new JSONObject();
         try {
             temp.put("key", key);
+            temp.put("model", Build.MODEL);
+            temp.put("brand", Build.BRAND);
+            temp.put("version_code", versionCode);
+            temp.put("android_version", Build.VERSION.SDK_INT);
         } catch (Exception e) {
             e.printStackTrace();
         }
