@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/splashTV"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
@@ -28,6 +28,7 @@
         android:textColor="@android:color/black"
         android:textSize="30sp"
         android:visibility="invisible"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="@+id/splashLogoIV"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="@+id/splashLogoIV"

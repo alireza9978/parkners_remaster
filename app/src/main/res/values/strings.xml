@@ -2,7 +2,7 @@
     <string name="app_name">Parkners</string>
     <string name="search_parking_list">تایپ کنید..</string>
     <string name="search_parking">جستجو پارکینگ</string>
-    <string name="splash_text">جای پارکت رو پیدا کن!</string>
+    <string name="splash_text">جای پارکت اینجاست!</string>
     <string name="logo">logo</string>
 
     <string name="search_bar_transition_name">mmd is</string>

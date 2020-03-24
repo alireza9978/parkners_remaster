@@ -3,6 +3,8 @@ package me.coleo.snapion.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import me.coleo.snapion.constants.FormatHelper;
+
 /**
  * کلاس پارکینگ
  */
@@ -140,6 +142,19 @@ public class Parking implements Serializable {
         this.working_detail_texts = working_detail_texts;
     }
 
+    public String getCapacityText() {
+        String out = "";
+        if (filled_capacity != 0) {
+            out += "<b>";
+            out += FormatHelper.toPersianNumber(String.valueOf(filled_capacity));
+            out += "</b>";
+            out += " از ";
+            out += FormatHelper.toPersianNumber(String.valueOf((int) total_capacity));
+        } else {
+            out += FormatHelper.toPersianNumber(String.valueOf((int) total_capacity));
+        }
+        return out;
+    }
 
     public String getPricesString() {
         StringBuilder result = new StringBuilder();
