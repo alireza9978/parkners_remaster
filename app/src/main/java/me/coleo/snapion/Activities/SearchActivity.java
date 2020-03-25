@@ -1,11 +1,12 @@
 package me.coleo.snapion.Activities;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,10 +29,14 @@ public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ImageView notFoundImage;
+    private ImageView disabler;
+    private ProgressBar progressBar;
     private TextView notFoundText;
     private EditText searchBar;
     private Button findButton;
     private Button backButton;
+
+    private boolean firstTime = true;
 
     private ParkingListAdapter parkingListAdapter;
     private ArrayList<Parking> parkingArrayList = new ArrayList<>();
@@ -88,7 +93,7 @@ public class SearchActivity extends AppCompatActivity {
                         mode, textToSearch, parkingArrayList, page);
             });
         }
-
+        showLoading();
 
     }
 
@@ -104,13 +109,12 @@ public class SearchActivity extends AppCompatActivity {
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 activity.page++;
                 ServerClass.aroundParking(SearchActivity.this, lat, lng, mode, textToSearch, parkingArrayList, activity.page);
+                showLoading();
             }
         };
 
         recyclerView.addOnScrollListener(listener);
-
         backButton.setOnClickListener(v -> context.finish());
-
     }
 
     /**
@@ -121,15 +125,17 @@ public class SearchActivity extends AppCompatActivity {
         notFoundImage = findViewById(R.id.not_found_image_id);
         notFoundText = findViewById(R.id.not_found_text_id);
         searchBar = findViewById(R.id.search_box_edit_text);
-        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                findButton.performClick();
-                return false;
-            }
+        searchBar.setOnEditorActionListener((textView, i, keyEvent) -> {
+            findButton.performClick();
+            return false;
         });
         findButton = findViewById(R.id.search_button);
         backButton = findViewById(R.id.back_arrow);
+        disabler = findViewById(R.id.disabler_image_view);
+        progressBar = findViewById(R.id.progress_bar);
+        disabler.setOnClickListener(v -> {
+
+        });
     }
 
     /**
@@ -142,6 +148,11 @@ public class SearchActivity extends AppCompatActivity {
             hideNotFound();
             parkingListAdapter.notifyDataSetChanged();
         }
+        hideLoading();
+    }
+
+    public void error() {
+        hideLoading();
     }
 
     /**
@@ -158,6 +169,25 @@ public class SearchActivity extends AppCompatActivity {
     private void hideNotFound() {
         notFoundText.setVisibility(View.INVISIBLE);
         notFoundImage.setVisibility(View.INVISIBLE);
+    }
+
+    private void showLoading() {
+        disabler.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+
+    }
+
+    private void hideLoading() {
+        disabler.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
+
+        if (!firstTime) {
+            recyclerView.smoothScrollBy(recyclerView.getWidth() / 2, recyclerView.getHeight() / 2,
+                    new AccelerateDecelerateInterpolator(), 2000);
+        } else
+            firstTime = false;
+
+
     }
 
 }

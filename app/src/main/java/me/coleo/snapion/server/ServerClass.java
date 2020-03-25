@@ -213,7 +213,10 @@ public class ServerClass {
                             }
                             ((SearchActivity) context).loadParkingFromServer();
                         }
-                        , error -> ServerClass.handleError(context, error));
+                        , error -> {
+                    ServerClass.handleError(context, error);
+                    ((SearchActivity) context).error();
+                });
 
 
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);

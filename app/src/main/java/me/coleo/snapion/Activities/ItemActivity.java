@@ -110,20 +110,14 @@ public class ItemActivity extends AppCompatActivity {
                 context.startActivity(mapIntent);
             });
             share.setOnClickListener(v -> {
-                Uri imageUri = Uri.parse("android.resource://" + getPackageName()
-                        + "/drawable/" + "red_pin.png");
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "Hello");
-                shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-                shareIntent.setType("image/png");
-                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                startActivity(Intent.createChooser(shareIntent, "send"));
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, parking.getShare_text());
+                sendIntent.setType("text/plain");
 
-//                Intent sharingIntent = new Intent(Intent.ACTION_SEND);
-//                sharingIntent.setType("text/plain");
-//                sharingIntent.putExtra(Intent.EXTRA_TEXT, "share some info");
-//                startActivity(Intent.createChooser(sharingIntent, "Share via"));
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+
             });
 
             initMap(parking.getAddress_latitude(), parking.getAddress_longitude());

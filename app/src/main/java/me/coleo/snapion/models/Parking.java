@@ -22,6 +22,7 @@ public class Parking implements Serializable {
     private ArrayList<Details> payment_texts;
     private ArrayList<Details> working_detail_texts;
     private ArrayList<Image> images;
+    private String share_text;
 
     @Override
     public String toString() {
@@ -41,6 +42,14 @@ public class Parking implements Serializable {
             return 0;
         }
         return (capacity_bar * 20f) - 1;
+    }
+
+    public String getShare_text() {
+        return share_text;
+    }
+
+    public void setShare_text(String share_text) {
+        this.share_text = share_text;
     }
 
     public int getCapacity_bar() {
@@ -150,6 +159,7 @@ public class Parking implements Serializable {
             out += "</b>";
             out += " از ";
             out += FormatHelper.toPersianNumber(String.valueOf((int) total_capacity));
+            out += " تکمیل است. ";
         } else {
             out += FormatHelper.toPersianNumber(String.valueOf((int) total_capacity));
         }
