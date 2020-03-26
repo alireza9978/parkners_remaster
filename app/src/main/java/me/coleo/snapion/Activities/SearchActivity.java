@@ -29,7 +29,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ImageView notFoundImage;
-    private ImageView disabler;
     private ProgressBar progressBar;
     private TextView notFoundText;
     private EditText searchBar;
@@ -131,11 +130,7 @@ public class SearchActivity extends AppCompatActivity {
         });
         findButton = findViewById(R.id.search_button);
         backButton = findViewById(R.id.back_arrow);
-        disabler = findViewById(R.id.disabler_image_view);
         progressBar = findViewById(R.id.progress_bar);
-        disabler.setOnClickListener(v -> {
-
-        });
     }
 
     /**
@@ -172,13 +167,10 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void showLoading() {
-        disabler.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.VISIBLE);
-
     }
 
     private void hideLoading() {
-        disabler.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.INVISIBLE);
 
         if (!firstTime) {

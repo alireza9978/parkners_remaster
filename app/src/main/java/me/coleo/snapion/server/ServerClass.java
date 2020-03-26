@@ -206,6 +206,7 @@ public class ServerClass {
                                 Gson gson = new Gson();
                                 for (int i = 0; i < parkingArray.length(); i++) {
                                     JSONObject parking = parkingArray.getJSONObject(i);
+                                    Log.i(TAG, "aroundParking: " + parking.toString());
                                     parkings.add(gson.fromJson(parking.toString(), Parking.class));
                                 }
                             } catch (JSONException e) {

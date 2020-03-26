@@ -12,7 +12,6 @@ import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -95,7 +94,7 @@ public class ItemActivity extends AppCompatActivity {
             addresTV.setText(parking.getAddress_text());
             feeTV.setText(parking.getPricesString());
             timesTV.setText(parking.getWorkHoursString());
-            capTV.setText(Html.fromHtml(parking.getCapacityText()));
+            capTV.setText(parking.getCapacityText());
 
             ItemSliderAdapter itemSliderAdapter = new ItemSliderAdapter(parking.getImageURLs());
 

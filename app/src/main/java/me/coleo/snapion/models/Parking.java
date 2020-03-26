@@ -3,8 +3,6 @@ package me.coleo.snapion.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import me.coleo.snapion.constants.FormatHelper;
-
 /**
  * کلاس پارکینگ
  */
@@ -16,7 +14,7 @@ public class Parking implements Serializable {
     private float total_capacity;
     private float address_latitude;
     private float address_longitude;
-    private int filled_capacity = 0;
+    private String capacity;
     private int capacity_bar;
     private String distance;
     private ArrayList<Details> payment_texts;
@@ -58,14 +56,6 @@ public class Parking implements Serializable {
 
     public void setCapacity_bar(int capacity_bar) {
         this.capacity_bar = capacity_bar;
-    }
-
-    public int getFilled_capacity() {
-        return filled_capacity;
-    }
-
-    public void setFilled_capacity(int filled_capacity) {
-        this.filled_capacity = filled_capacity;
     }
 
     public String getDistance() {
@@ -152,18 +142,7 @@ public class Parking implements Serializable {
     }
 
     public String getCapacityText() {
-        String out = "";
-        if (filled_capacity != 0) {
-            out += "<b>";
-            out += FormatHelper.toPersianNumber(String.valueOf(filled_capacity));
-            out += "</b>";
-            out += " از ";
-            out += FormatHelper.toPersianNumber(String.valueOf((int) total_capacity));
-            out += " تکمیل است. ";
-        } else {
-            out += FormatHelper.toPersianNumber(String.valueOf((int) total_capacity));
-        }
-        return out;
+        return capacity;
     }
 
     public String getPricesString() {
