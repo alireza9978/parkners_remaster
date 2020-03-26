@@ -151,7 +151,7 @@ public class Parking implements Serializable {
             result.append(payment_texts.get(i).getText());
             result.append("\n");
         }
-        return result.toString();
+        return result.toString().trim();
     }
 
 
@@ -161,7 +161,7 @@ public class Parking implements Serializable {
             result.append(working_detail_texts.get(i).getText());
             result.append("\n");
         }
-        return result.toString();
+        return result.toString().trim();
     }
 
 
