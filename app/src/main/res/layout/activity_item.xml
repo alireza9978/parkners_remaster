@@ -118,7 +118,7 @@
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
-                            android:background="@drawable/routing_item_back"
+                            android:background="@android:color/white"
                             android:contentDescription="@string/find_route"
                             android:fadingEdgeLength="1dp"
                             android:foregroundGravity="center"
