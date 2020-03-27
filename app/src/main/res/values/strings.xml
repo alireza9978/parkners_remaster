@@ -15,6 +15,10 @@
     <string name="pin_button">pin_button</string>
     <string name="not_found">پارکینگی پیدا نشد :(</string>
     <string name="network_connection">اتصال خود به اينترنت را بررسي نماييد</string>
+    <string name="gps_not_found_title">عدم دسترسی به مکان</string>
+    <string name="gps_not_found_message">آیا اجازه دسترسی به مکان را میدهید؟</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
 
 
 </resources>

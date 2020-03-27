@@ -19,7 +19,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.common.api.ApiException;
@@ -92,16 +91,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        permissionGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-        if(!permissionGranted){
-
-            Toast.makeText(context, "جهت موقعیت یابی ، برنامه نیاز به دسترسی به موقعیت مکانی دارد.", Toast.LENGTH_LONG).show();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
-            }
-        }
-
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
     @Override
@@ -111,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
             map = findViewById(R.id.map);
             map.getLayers().add(NeshanServices.createBaseMap(NeshanMapStyle.STANDARD_DAY));
             focusOnUserLocation();
-            startLocationUpdates();
         });
     }
 
@@ -120,8 +109,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         initLayoutReferences();
         initLocation();
-        startReceivingLocationUpdates();
-
     }
 
     // Initializing layout references (views, map and map events)
@@ -197,12 +184,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
-                // location is received
                 if (userLocation == null) {
                     userLocation = locationResult.getLastLocation();
-                    map.setFocalPointPosition(new LngLat(userLocation.getLongitude(), userLocation.getLatitude()), 1f);
                 }
                 userLocation = locationResult.getLastLocation();
+
+                focusOnUserLocation();
+                stopLocationUpdates();
             }
         };
 
@@ -308,11 +296,26 @@ public class MainActivity extends AppCompatActivity {
      * گرفتن اخرین مکان کاربر
      */
     private void getLastLocation() {
-        permissionGranted = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-        if (permissionGranted)
-            focusOnUserLocation();
-        else
-            Constants.getLocationPermission(context, (MainActivity) context);
+
+        permissionGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        if (!permissionGranted) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+        } else {
+
+            if (Constants.isLocationEnabled(this)) {
+                fusedLocationClient.getLastLocation()
+                        .addOnSuccessListener(this, locationSettingsResponse ->
+                                fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper()));
+            } else {
+                Toast.makeText(context, "جهت موقعیت یابی ، برنامه نیاز به دسترسی به موقعیت مکانی دارد.", Toast.LENGTH_LONG).show();
+                context.startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            }
+
+
+        }
+
     }
 
     @Override
@@ -325,11 +328,9 @@ public class MainActivity extends AppCompatActivity {
      * جلوگیری از بررسی تغیرات مکان کاربر
      */
     public void stopLocationUpdates() {
-        // Removing location updates
         fusedLocationClient
                 .removeLocationUpdates(locationCallback)
                 .addOnCompleteListener(this, task -> {
-//                        Toast.makeText(getApplicationContext(), "Location updates stopped!", Toast.LENGTH_SHORT).show();
                 });
     }
 

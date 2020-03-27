@@ -48,6 +48,8 @@ public class SearchActivity extends AppCompatActivity {
     private SearchActivity activity = this;
     private SearchActivity context = this;
 
+    private boolean haveClicked = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,20 +82,44 @@ public class SearchActivity extends AppCompatActivity {
             searchBar.setFocusable(false);
             searchBar.setFocusableInTouchMode(false);
             searchBar.setClickable(false);
+            searchBar.setOnClickListener(v -> {
+                searchBar.setText("");
+                searchBar.setFocusable(true);
+                searchBar.setFocusableInTouchMode(true);
+                searchBar.setClickable(true);
+                searchBar.setOnClickListener(v1 -> {
+
+                });
+                hideNotFound();
+                searchBar.setHint("تایپ کنید...");
+                setFindButtonListner();
+                mode = Constants.SearchMode.search;
+                parkingArrayList.clear();
+                parkingListAdapter.notifyDataSetChanged();
+            });
+            showLoading();
         } else {
             hideNotFound();
             searchBar.setHint("تایپ کنید...");
-            findButton.setOnClickListener(v -> {
+            setFindButtonListner();
+        }
+
+    }
+
+
+    private void setFindButtonListner() {
+        findButton.setOnClickListener(v -> {
+            if (!haveClicked) {
                 activity.page = 1;
                 parkingArrayList.clear();
                 parkingListAdapter.notifyDataSetChanged();
                 textToSearch = searchBar.getText().toString();
                 ServerClass.aroundParking(this, lat, lng,
                         mode, textToSearch, parkingArrayList, page);
-            });
-        }
-        showLoading();
+                haveClicked = true;
+            }
 
+        });
     }
 
     /**
@@ -137,6 +163,7 @@ public class SearchActivity extends AppCompatActivity {
      * بارگزاری پارکینگ ها از سرور
      */
     public void loadParkingFromServer() {
+        haveClicked = false;
         if (parkingArrayList.isEmpty()) {
             showNotFound();
         } else {
