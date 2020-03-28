@@ -288,7 +288,6 @@ public class MainActivity extends AppCompatActivity {
         if (userLocation != null) {
             map.setFocalPointPosition(
                     new LngLat(userLocation.getLongitude(), userLocation.getLatitude()), 0.25f);
-            map.setZoom(15, 0.25f);
         }
     }
 

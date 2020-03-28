@@ -30,6 +30,7 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ImageView notFoundImage;
     private ProgressBar progressBar;
+    private ProgressBar progressBarMid;
     private TextView notFoundText;
     private EditText searchBar;
     private Button findButton;
@@ -97,7 +98,7 @@ public class SearchActivity extends AppCompatActivity {
                 parkingArrayList.clear();
                 parkingListAdapter.notifyDataSetChanged();
             });
-            showLoading();
+            showLoadingMid();
         } else {
             hideNotFound();
             searchBar.setHint("تایپ کنید...");
@@ -157,6 +158,7 @@ public class SearchActivity extends AppCompatActivity {
         findButton = findViewById(R.id.search_button);
         backButton = findViewById(R.id.back_arrow);
         progressBar = findViewById(R.id.progress_bar);
+        progressBarMid = findViewById(R.id.progress_bar_mid);
     }
 
     /**
@@ -197,15 +199,20 @@ public class SearchActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
     }
 
+    private void showLoadingMid() {
+        progressBarMid.setVisibility(View.VISIBLE);
+    }
+
     private void hideLoading() {
         progressBar.setVisibility(View.INVISIBLE);
 
         if (!firstTime) {
             recyclerView.smoothScrollBy(recyclerView.getWidth() / 2, recyclerView.getHeight() / 2,
                     new AccelerateDecelerateInterpolator(), 2000);
-        } else
+        } else {
+            progressBarMid.setVisibility(View.INVISIBLE);
             firstTime = false;
-
+        }
 
     }
 
