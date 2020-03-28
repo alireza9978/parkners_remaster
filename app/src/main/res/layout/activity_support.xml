@@ -128,7 +128,7 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:gravity="center_horizontal"
-                    android:text="پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. پارکینگ هوشمند پارکنرز در خدمت شماست. "
+                    android:text="با اپلیکیشن هوشمند پارکنرز به راحتی و پیش از رسیدن به مقصد، از محل تمامی پارکینگ های موجود و وضعیت لحظه ای آنها مطلع شوید. \nهوشمندانه مسیر خود را انتخاب کنید."
                     android:textColor="@android:color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
