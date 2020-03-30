@@ -54,7 +54,6 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
             Uri gmmIntentUri = Uri.parse("google.navigation:q=" + parking.getAddress_latitude() + "," + parking.getAddress_longitude() + "&mode=d");
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
             mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            mapIntent.setPackage("com.google.android.apps.maps");
             context.startActivity(mapIntent);
         });
         holder.itemView.setOnClickListener(v -> {

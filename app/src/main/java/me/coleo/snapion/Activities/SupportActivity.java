@@ -53,7 +53,7 @@ public class SupportActivity extends AppCompatActivity {
      * نمایش تاییدیه ارسال و بستن صفحه
      */
     public void sent() {
-        Toast.makeText(this, "ارسال شد.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "ممنون، تیم پشتیبانی پیام شما را بررسی می کند.", Toast.LENGTH_LONG).show();
         finish();
     }
 

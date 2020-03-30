@@ -105,7 +105,6 @@ public class ItemActivity extends AppCompatActivity {
             route.setOnClickListener(v -> {
                 Uri gmmIntentUri = Uri.parse("google.navigation:q=" + parking.getAddress_latitude() + "," + parking.getAddress_longitude() + "&mode=d");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
                 context.startActivity(mapIntent);
             });
             share.setOnClickListener(v -> {

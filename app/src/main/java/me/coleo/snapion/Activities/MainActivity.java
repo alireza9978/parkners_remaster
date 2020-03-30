@@ -41,6 +41,9 @@ import org.neshan.ui.ClickData;
 import org.neshan.ui.MapEventListener;
 import org.neshan.ui.MapView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import me.coleo.snapion.R;
 import me.coleo.snapion.constants.Constants;
 
@@ -309,7 +312,14 @@ public class MainActivity extends AppCompatActivity {
                                 fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper()));
             } else {
                 Toast.makeText(context, "جهت موقعیت یابی ، برنامه نیاز به دسترسی به موقعیت مکانی دارد.", Toast.LENGTH_LONG).show();
-                context.startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                TimerTask timerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        context.startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(timerTask, 1000);
             }
 
 
