@@ -58,7 +58,7 @@ public class ParkingListAdapter extends RecyclerView.Adapter<ParkingListAdapter.
         });
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ItemActivity.class);
-            intent.putExtra(Constants.PARKING_ID, parking);
+            intent.putExtra(Constants.PARKING_ID, parking.getId());
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         });

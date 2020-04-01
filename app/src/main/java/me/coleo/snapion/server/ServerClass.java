@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import me.coleo.snapion.Activities.ItemActivity;
 import me.coleo.snapion.Activities.SearchActivity;
 import me.coleo.snapion.Activities.SplashActivity;
 import me.coleo.snapion.Activities.SupportActivity;
@@ -206,7 +207,6 @@ public class ServerClass {
                                 Gson gson = new Gson();
                                 for (int i = 0; i < parkingArray.length(); i++) {
                                     JSONObject parking = parkingArray.getJSONObject(i);
-                                    Log.i(TAG, "aroundParking: " + parking.toString());
                                     parkings.add(gson.fromJson(parking.toString(), Parking.class));
                                 }
                             } catch (JSONException e) {
@@ -217,6 +217,37 @@ public class ServerClass {
                         , error -> {
                     ServerClass.handleError(context, error);
                     ((SearchActivity) context).error();
+                });
+
+
+        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+
+    }
+
+    /**
+     * گرفتن یک پارکینگ
+     */
+    public static void singleParking(Context context, int id) {
+
+        String url = Constants.SINGLE_PARKING_URL;
+        url += id;
+
+        ObjectRequest jsonObjectRequest = new ObjectRequest
+                (context, Request.Method.GET, url, null,
+                        response -> {
+                            saveToken(context, response);
+                            Parking parking = null;
+                            try {
+                                JSONObject parkingJsonObject = response.getJSONObject("parking");
+                                Gson gson = new Gson();
+                                parking = gson.fromJson(parkingJsonObject.toString(), Parking.class);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            ((ItemActivity) context).loadParking(parking);
+                        }
+                        , error -> {
+                    ServerClass.handleError(context, error);
                 });
 
 

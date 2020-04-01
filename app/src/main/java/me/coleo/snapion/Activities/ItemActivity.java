@@ -36,6 +36,7 @@ import me.coleo.snapion.adapter.ItemImageLoadingService;
 import me.coleo.snapion.adapter.ItemSliderAdapter;
 import me.coleo.snapion.constants.Constants;
 import me.coleo.snapion.models.Parking;
+import me.coleo.snapion.server.ServerClass;
 import ss.com.bannerslider.Slider;
 
 /**
@@ -47,6 +48,7 @@ public class ItemActivity extends AppCompatActivity {
     Slider slider;
     MapView map;
     Context context = this;
+    ImageButton share, route;
 
     /**
      * تبدیل VectorDrawabe به Bitmap
@@ -77,18 +79,23 @@ public class ItemActivity extends AppCompatActivity {
         titleTV = findViewById(R.id.itemTitleTV);
         timesTV = findViewById(R.id.itemTimesTV);
         capTV = findViewById(R.id.itemCapacityTV);
-        ImageButton share = findViewById(R.id.shareButton);
-        ImageButton route = findViewById(R.id.route_button);
+        share = findViewById(R.id.shareButton);
+        route = findViewById(R.id.route_button);
+
         ImageButton back = findViewById(R.id.back_arrow);
         back.setOnClickListener(v -> finish());
 
         Bundle extra = getIntent().getExtras();
         assert extra != null;
-        Parking parking;
+        int id = extra.getInt(Constants.PARKING_ID);
+
+        ServerClass.singleParking(this, id);
+
+    }
+
+    public void loadParking(Parking parking) {
         try {
 
-            parking = (Parking) extra.getSerializable(Constants.PARKING_ID);
-            assert parking != null;
 
             titleTV.setText(parking.getTitle());
             addresTV.setText(parking.getAddress_text());
