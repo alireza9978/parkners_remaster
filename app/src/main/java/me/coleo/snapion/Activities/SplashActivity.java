@@ -122,7 +122,8 @@ public class SplashActivity extends AppCompatActivity {
             showRetry();
         } else {
             hideRetry();
-            if (Constants.getKey(getApplicationContext()).equals(Constants.NO_KEY))
+            if (Constants.getKey(getApplicationContext()).equals(Constants.NO_KEY) ||
+                    Constants.getToken(getApplicationContext()).equals(""))
                 ServerClass.createUser(SplashActivity.this);
             else
                 ServerClass.enterUser(SplashActivity.this);

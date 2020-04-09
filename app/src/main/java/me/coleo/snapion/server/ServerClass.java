@@ -65,6 +65,7 @@ public class ServerClass {
             if (error.networkResponse.statusCode == 403) {
                 Toast.makeText(context, "کلید شما منقضی شده", Toast.LENGTH_SHORT).show();
                 Constants.setToken(context, "");
+                Constants.setKey(context, Constants.NO_KEY);
                 Intent intent = new Intent(context, SplashActivity.class);
                 context.startActivity(intent);
                 ((Activity) context).finish();
