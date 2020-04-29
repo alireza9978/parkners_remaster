@@ -111,6 +111,7 @@ public class SearchActivity extends AppCompatActivity {
     private void setFindButtonListner() {
         findButton.setOnClickListener(v -> {
             if (!haveClicked) {
+                firstTime = true;
                 activity.page = 1;
                 parkingArrayList.clear();
                 parkingListAdapter.notifyDataSetChanged();
@@ -118,8 +119,8 @@ public class SearchActivity extends AppCompatActivity {
                 ServerClass.aroundParking(this, lat, lng,
                         mode, textToSearch, parkingArrayList, page);
                 haveClicked = true;
+                showLoadingMid();
             }
-
         });
     }
 
