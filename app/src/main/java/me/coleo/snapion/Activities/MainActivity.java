@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.SettingsClient;
+import com.wooplr.spotlight.SpotlightConfig;
+import com.wooplr.spotlight.utils.SpotlightSequence;
 
 import org.neshan.core.Bounds;
 import org.neshan.core.LngLat;
@@ -96,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+
     }
 
     @Override
@@ -106,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
             map.getLayers().add(NeshanServices.createBaseMap(NeshanMapStyle.STANDARD_DAY));
             focusOnUserLocation();
         });
+
+
     }
 
     @Override
@@ -113,6 +120,29 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         initLayoutReferences();
         initLocation();
+
+        SpotlightConfig config = new SpotlightConfig();
+        config.setIntroAnimationDuration(400);
+        config.setRevealAnimationEnabled(true);
+        config.setPerformClick(true);
+        config.setFadingTextDuration(400);
+        config.setHeadingTvColor(Color.parseColor("#f4f4f4"));
+        config.setHeadingTvSize(30);
+        config.setSubHeadingTvColor(Color.parseColor("#ffdddd"));
+        config.setSubHeadingTvSize(16);
+        config.setMaskColor(Color.parseColor("#cc3a3535"));
+        config.setLineAnimationDuration(400);
+        config.setLineAndArcColor(Color.parseColor("#ff7315"));
+        config.setDismissOnTouch(true);
+        config.setDismissOnBackpress(true);
+
+        SpotlightSequence.getInstance(this, config)
+                .addSpotlight(pinButton, "پارکینگ‌های اطراف تو", "مقصدت رو بزن و پارکینگ‌های اطرافش رو ببین", "1")
+                .addSpotlight(search, "جستجو کن", "پارکینگ‌ مدنظرت رو جستوجو کن", "2")
+                .addSpotlight(findLocation, "ببین کجایی", "موقعیت مکانی‌ات رو روی نقشه ببین", "3")
+                .addSpotlight(logoButton, "نظرتو بگو", "از اینجا با ما در ارتباط باش", "4")
+                .startSequence();
+
     }
 
     // Initializing layout references (views, map and map events)
