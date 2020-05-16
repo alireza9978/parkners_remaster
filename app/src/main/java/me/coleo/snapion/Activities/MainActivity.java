@@ -1,6 +1,7 @@
 package me.coleo.snapion.Activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -100,48 +102,62 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
+        map = findViewById(R.id.map);
+        map.getLayers().add(NeshanServices.createBaseMap(NeshanMapStyle.STANDARD_DAY));
+        focusOnUserLocation();
+
+        initLayoutReferences();
+        initLocation();
+
+        Activity activity = this;
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SpotlightConfig config = new SpotlightConfig();
+                        config.setIntroAnimationDuration(800);
+                        config.setRevealAnimationEnabled(true);
+                        config.setPerformClick(true);
+                        config.setTypeface(ResourcesCompat.getFont(getBaseContext(), R.font.vazir));
+                        config.setFadingTextDuration(800);
+                        config.setHeadingTvColor(Color.parseColor("#ffffff"));
+                        config.setHeadingTvSize(30);
+                        config.setSubHeadingTvColor(Color.parseColor("#dddddd"));
+                        config.setSubHeadingTvSize(16);
+                        config.setMaskColor(Color.parseColor("#dd3a3535"));
+                        config.setLineAnimationDuration(400);
+                        config.setLineAndArcColor(Color.parseColor("#4149D8"));
+                        config.setDismissOnTouch(true);
+                        config.setDismissOnBackpress(true);
+
+                        SpotlightSequence.getInstance(activity, config)
+                                .addSpotlight(pinButton, "پارکینگ‌های اطراف تو", "مقصدت رو بزن و وضعیت لحظه ای پارکینگ های اطرافش رو ببین", "1")
+                                .addSpotlight(search, "جستجو کن", "پارکینگ‌ مدنظرت رو جستوجو کن", "2")
+                                .addSpotlight(findLocation, "ببین کجایی", "موقعیت مکانی‌ات رو روی نقشه ببین", "3")
+                                .addSpotlight(logoButton, "نظرتو بگو", "از اینجا با ما در ارتباط باش", "4")
+                                .startSequence();
+                    }
+                });
+
+
+            }
+        };
+        Timer t = new Timer();
+        t.schedule(task, 2000);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        runOnUiThread(() -> {
-            map = findViewById(R.id.map);
-            map.getLayers().add(NeshanServices.createBaseMap(NeshanMapStyle.STANDARD_DAY));
-            focusOnUserLocation();
-        });
-
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        initLayoutReferences();
-        initLocation();
 
-        SpotlightConfig config = new SpotlightConfig();
-        config.setIntroAnimationDuration(400);
-        config.setRevealAnimationEnabled(true);
-        config.setPerformClick(true);
-        config.setFadingTextDuration(400);
-        config.setHeadingTvColor(Color.parseColor("#f4f4f4"));
-        config.setHeadingTvSize(30);
-        config.setSubHeadingTvColor(Color.parseColor("#ffdddd"));
-        config.setSubHeadingTvSize(16);
-        config.setMaskColor(Color.parseColor("#cc3a3535"));
-        config.setLineAnimationDuration(400);
-        config.setLineAndArcColor(Color.parseColor("#ff7315"));
-        config.setDismissOnTouch(true);
-        config.setDismissOnBackpress(true);
-
-        SpotlightSequence.getInstance(this, config)
-                .addSpotlight(pinButton, "پارکینگ‌های اطراف تو", "مقصدت رو بزن و پارکینگ‌های اطرافش رو ببین", "1")
-                .addSpotlight(search, "جستجو کن", "پارکینگ‌ مدنظرت رو جستوجو کن", "2")
-                .addSpotlight(findLocation, "ببین کجایی", "موقعیت مکانی‌ات رو روی نقشه ببین", "3")
-                .addSpotlight(logoButton, "نظرتو بگو", "از اینجا با ما در ارتباط باش", "4")
-                .startSequence();
 
     }
 
