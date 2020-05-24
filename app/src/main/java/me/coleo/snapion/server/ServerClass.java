@@ -63,6 +63,8 @@ public class ServerClass {
             Toast.makeText(context, "اتصال اینترنت خود را بررسی کنید", Toast.LENGTH_SHORT).show();
         } else {
             if (error.networkResponse.statusCode == 403) {
+                Log.i(TAG, "handleError: " + error.getMessage());
+                Log.i(TAG, "handleError: " + new String(error.networkResponse.data));
                 Toast.makeText(context, "کلید شما منقضی شده", Toast.LENGTH_SHORT).show();
                 Constants.setToken(context, "");
                 Constants.setKey(context, Constants.NO_KEY);

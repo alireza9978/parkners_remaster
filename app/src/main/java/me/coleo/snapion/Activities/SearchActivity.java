@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -28,7 +27,7 @@ import me.coleo.snapion.server.ServerClass;
 public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private ImageView notFoundImage;
+    private Button notFoundBack;
     private ProgressBar progressBar;
     private ProgressBar progressBarMid;
     private TextView notFoundText;
@@ -149,7 +148,8 @@ public class SearchActivity extends AppCompatActivity {
      */
     private void initViews() {
         recyclerView = findViewById(R.id.parking_list);
-        notFoundImage = findViewById(R.id.not_found_image_id);
+        notFoundBack = findViewById(R.id.not_found_image_id);
+        notFoundBack.setOnClickListener(v -> finish());
         notFoundText = findViewById(R.id.not_found_text_id);
         searchBar = findViewById(R.id.search_box_edit_text);
         searchBar.setOnEditorActionListener((textView, i, keyEvent) -> {
@@ -185,7 +185,7 @@ public class SearchActivity extends AppCompatActivity {
      */
     private void showNotFound() {
         notFoundText.setVisibility(View.VISIBLE);
-        notFoundImage.setVisibility(View.VISIBLE);
+        notFoundBack.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -193,7 +193,7 @@ public class SearchActivity extends AppCompatActivity {
      */
     private void hideNotFound() {
         notFoundText.setVisibility(View.INVISIBLE);
-        notFoundImage.setVisibility(View.INVISIBLE);
+        notFoundBack.setVisibility(View.INVISIBLE);
     }
 
     private void showLoading() {

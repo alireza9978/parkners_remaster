@@ -2,6 +2,8 @@ package me.coleo.snapion.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -33,6 +35,8 @@ public class SplashActivity extends AppCompatActivity {
     AlphaAnimation anim;
     ConstraintLayout retry;
 
+    private String android_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +47,9 @@ public class SplashActivity extends AppCompatActivity {
         animation.setFillAfter(false);
         animation.setAnimationListener(new MyAnimationListener());
 
+        android_id = Secure.getString(getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
+        Constants.setKey(this, android_id);
+        Log.i("SPLASH", "onCreate: " + android_id);
 
         logo = findViewById(R.id.splashLogoIV);
         splashTV = findViewById(R.id.splashTV);
@@ -122,11 +129,7 @@ public class SplashActivity extends AppCompatActivity {
             showRetry();
         } else {
             hideRetry();
-            if (Constants.getKey(getApplicationContext()).equals(Constants.NO_KEY) ||
-                    Constants.getToken(getApplicationContext()).equals(""))
-                ServerClass.createUser(SplashActivity.this);
-            else
-                ServerClass.enterUser(SplashActivity.this);
+            ServerClass.enterUser(SplashActivity.this);
         }
     }
 

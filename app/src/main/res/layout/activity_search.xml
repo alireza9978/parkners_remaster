@@ -9,17 +9,17 @@
     tools:context="me.coleo.snapion.Activities.SearchActivity">
 
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/top_search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorMapConteinersBack"
         android:transitionName="@string/main_container_transition_name"
-        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/page_title"
         app:layout_constraintVertical_bias="0">
 
         <Button
@@ -61,11 +61,12 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/search_box_edit_text"
                 style="@style/AppTheme.EditText"
-                android:layout_marginRight="10dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
                 android:cursorVisible="true"
                 android:hint="@string/search_parking_list"
+                android:textCursorDrawable="@color/colorText"
                 android:imeOptions="actionSearch"
                 android:importantForAutofill="no"
                 android:inputType="text"
@@ -89,16 +90,23 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_search_bar" />
 
-    <ImageView
+    <Button
         android:id="@+id/not_found_image_id"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:src="@drawable/ic_not_foud_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/support_button_back"
+        android:fontFamily="@font/vazir"
+        android:paddingStart="38dp"
+        android:paddingEnd="38dp"
+        android:text="جستوجو با نقشه"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_search_bar"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.4" />
 
     <TextView
         android:id="@+id/not_found_text_id"
@@ -107,9 +115,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:text="@string/not_found"
+        app:layout_constraintBottom_toTopOf="@id/not_found_image_id"
         app:layout_constraintLeft_toLeftOf="@id/not_found_image_id"
-        app:layout_constraintRight_toRightOf="@id/not_found_image_id"
-        app:layout_constraintTop_toBottomOf="@id/not_found_image_id" />
+        app:layout_constraintRight_toRightOf="@id/not_found_image_id" />
 
     <ProgressBar
         android:id="@+id/progress_bar_mid"
@@ -134,5 +142,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.95" />
 
+    <TextView
+        android:id="@+id/page_title"
+        style="@style/AppTheme.TextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="مقصد یا نام پارکینگ را جستوجو کن"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
