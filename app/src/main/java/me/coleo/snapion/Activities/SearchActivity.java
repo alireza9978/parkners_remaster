@@ -31,6 +31,7 @@ public class SearchActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ProgressBar progressBarMid;
     private TextView notFoundText;
+    private TextView title;
     private EditText searchBar;
     private Button findButton;
     private Button backButton;
@@ -62,6 +63,7 @@ public class SearchActivity extends AppCompatActivity {
             lat = extra.getDouble(Constants.SEARCH_LAT);
             lng = extra.getDouble(Constants.SEARCH_LNG);
         } else {
+
             boolean exist = extra.containsKey(Constants.HAVE_lATLNG);
             if (exist) {
                 lat = extra.getDouble(Constants.SEARCH_LAT);
@@ -77,12 +79,15 @@ public class SearchActivity extends AppCompatActivity {
 
         if (mode == Constants.SearchMode.location) {
             hideNotFound();
+            title.setVisibility(View.GONE);
+
             ServerClass.aroundParking(this, lat, lng, mode, null, parkingArrayList, page);
             searchBar.setText("اطراف شما");
             searchBar.setFocusable(false);
             searchBar.setFocusableInTouchMode(false);
             searchBar.setClickable(false);
             searchBar.setOnClickListener(v -> {
+                title.setVisibility(View.VISIBLE);
                 searchBar.setText("");
                 searchBar.setFocusable(true);
                 searchBar.setFocusableInTouchMode(true);
@@ -91,7 +96,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 });
                 hideNotFound();
-                searchBar.setHint("تایپ کنید...");
+                searchBar.setHint("تایپ کن...");
                 setFindButtonListner();
                 mode = Constants.SearchMode.search;
                 parkingArrayList.clear();
@@ -100,7 +105,8 @@ public class SearchActivity extends AppCompatActivity {
             showLoadingMid();
         } else {
             hideNotFound();
-            searchBar.setHint("تایپ کنید...");
+            title.setVisibility(View.VISIBLE);
+            searchBar.setHint("تایپ کن...");
             setFindButtonListner();
         }
 
@@ -119,6 +125,7 @@ public class SearchActivity extends AppCompatActivity {
                         mode, textToSearch, parkingArrayList, page);
                 haveClicked = true;
                 showLoadingMid();
+                hideNotFound();
             }
         });
     }
@@ -160,6 +167,7 @@ public class SearchActivity extends AppCompatActivity {
         backButton = findViewById(R.id.back_arrow);
         progressBar = findViewById(R.id.progress_bar);
         progressBarMid = findViewById(R.id.progress_bar_mid);
+        title = findViewById(R.id.page_title);
     }
 
     /**

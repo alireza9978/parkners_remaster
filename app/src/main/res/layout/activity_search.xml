@@ -98,7 +98,7 @@
         android:fontFamily="@font/vazir"
         android:paddingStart="38dp"
         android:paddingEnd="38dp"
-        android:text="جستوجو با نقشه"
+        android:text="جستجو با نقشه"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -149,7 +149,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
-        android:text="مقصد یا نام پارکینگ را جستوجو کن"
+        android:text="مقصد یا نام پارکینگ را جستجو کن"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
