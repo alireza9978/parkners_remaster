@@ -117,7 +117,7 @@
                     android:layout_marginEnd="8dp"
                     android:text="پشتیبانی:"
                     android:textColor="@android:color/black"
-                    android:textSize="17sp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toStartOf="@+id/phoneIV"
                     app:layout_constraintTop_toBottomOf="@+id/telegram_box" />
 
@@ -129,6 +129,7 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:gravity="center_horizontal"
+                    android:textSize="14sp"
                     android:text="با موتور جستجو پارکینگ پارکنرز از هوش مصنوعی برای پیدا کردن پارکینگ های موجود در مقصد دلخواهت استفاده کن و از تعداد جای پارک های خالی در‌ لحظه خبردار شو!
 هوشمندانه مسیرتو انتخاب کن."
                     android:textColor="@android:color/black"
@@ -136,15 +137,41 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
+                <TextView
+                    android:id="@+id/telegram_title_box"
+                    style="@style/AppTheme.TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="پارکنرز رو در تلگرام دنبال کن:"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@+id/phoneIV"
+                    app:layout_constraintTop_toBottomOf="@+id/descTV" />
+
                 <TextView
                     android:id="@+id/telegram_box"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textColor="@android:color/black"
-                    app:layout_constraintLeft_toLeftOf="@id/descTV"
-                    app:layout_constraintRight_toRightOf="@id/descTV"
-                    app:layout_constraintTop_toBottomOf="@id/descTV" />
+                    android:layout_marginStart="24dp"
+                    android:fontFamily="@font/vazir"
+                    android:textColor="#0000FF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/telegram_title_box" />
+
+
+                <ImageView
+                    android:id="@+id/telegram_logo"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintBottom_toBottomOf="@id/telegram_title_box"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/telegram_title_box"
+                    app:srcCompat="@drawable/ic_telegram_logo" />
 
                 <ImageView
                     android:id="@+id/phoneIV"

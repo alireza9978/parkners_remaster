@@ -51,9 +51,7 @@ public class SupportActivity extends AppCompatActivity {
 
 
         Typeface font = ResourcesCompat.getFont(getBaseContext(), R.font.vazir);
-        String start = "پارکنرز رو در تلگرام دنبال کن :";
         String link = "t.me/parkners";
-        SpannableString startSpannableString = new SpannableString(start);
         SpannableString linkSpannableString = new SpannableString(link);
 
 
@@ -62,11 +60,7 @@ public class SupportActivity extends AppCompatActivity {
         linkSpannableString.setSpan(new UnderlineSpan(), 0, linkSpannableString.length(), 33);
         linkSpannableString.setSpan(new CustomTypefaceSpan("", font), 0, linkSpannableString.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 
-        startSpannableString.setSpan(new ForegroundColorSpan(Color.BLACK), 0, startSpannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        startSpannableString.setSpan(new CustomTypefaceSpan("", font), 0, startSpannableString.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 
-        telegram.append(startSpannableString);
-        telegram.append(" ");
         telegram.append(linkSpannableString);
 
         telegram.setMovementMethod(LinkMovementMethod.getInstance());
