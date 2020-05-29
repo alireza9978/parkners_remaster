@@ -7,8 +7,8 @@ android {
         applicationId "ir.coleo.parkners"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 18
-        versionName "1.1.4"
+        versionCode 19
+        versionName "1.1.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

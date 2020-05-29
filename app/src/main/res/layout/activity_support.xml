@@ -52,13 +52,13 @@
                     android:background="@drawable/support_et_back"
                     android:elevation="4dp"
                     android:ems="10"
-                    android:hint="پیشنهاد یا شکایتت رو بنویس:"
                     android:gravity="top"
-                    android:textCursorDrawable="@color/colorText"
+                    android:hint="پیشنهاد یا شکایتت رو بنویس:"
                     android:lines="5"
                     android:padding="16dp"
                     android:singleLine="false"
                     android:textColor="@android:color/black"
+                    android:textCursorDrawable="@color/colorText"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/supportTitleTV" />
@@ -67,13 +67,13 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="28dp"
                     android:background="@drawable/support_button_back"
                     android:elevation="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/commentET">
 
                     <Button
@@ -119,7 +119,7 @@
                     android:textColor="@android:color/black"
                     android:textSize="17sp"
                     app:layout_constraintEnd_toStartOf="@+id/phoneIV"
-                    app:layout_constraintTop_toBottomOf="@+id/descTV" />
+                    app:layout_constraintTop_toBottomOf="@+id/telegram_box" />
 
                 <TextView
                     android:id="@+id/descTV"
@@ -129,11 +129,22 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:gravity="center_horizontal"
-                    android:text="با اپلیکیشن هوشمند پارکنرز به راحتی و پیش از رسیدن به مقصد، از محل تمامی پارکینگ های موجود و وضعیت لحظه ای آنها مطلع شوید. \nهوشمندانه مسیر خود را انتخاب کنید."
+                    android:text="با موتور جستجو پارکینگ پارکنرز از هوش مصنوعی برای پیدا کردن پارکینگ های موجود در مقصد دلخواهت استفاده کن و از تعداد جای پارک های خالی در‌ لحظه خبردار شو!
+هوشمندانه مسیرتو انتخاب کن."
                     android:textColor="@android:color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/telegram_box"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintLeft_toLeftOf="@id/descTV"
+                    app:layout_constraintRight_toRightOf="@id/descTV"
+                    app:layout_constraintTop_toBottomOf="@id/descTV" />
 
                 <ImageView
                     android:id="@+id/phoneIV"
