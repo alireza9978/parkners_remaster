@@ -41,8 +41,8 @@ public class Constants {
     public static String PARKING_ID = "parkingson";
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 10810;
 
-    private static String BASE_URL = "http://dev2.parkners.com/api/av1/";
-    public static String BASE_MEDIA_URL = "http://dev2.parkners.com";
+    public static String BASE_MEDIA_URL = "https://dev2.parkners.com";
+    private static String BASE_URL = "https://dev2.parkners.com/api/av1/";
     public static String CREATE_USER_URL = BASE_URL + "users/create";
     public static String ENTER_USER_URL = BASE_URL + "users/enter";
     public static String AROUND_PARKING_URL = BASE_URL + "parkings/manager";
